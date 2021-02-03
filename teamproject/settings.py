@@ -31,8 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'echoz3app',
-    'echoz2app',
     'echozapp',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -122,3 +120,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+

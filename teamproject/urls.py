@@ -18,7 +18,5 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('echozapp/',include('echozapp.urls')),
-    path('echoz2app/',include('echoz2app.urls')),
-    path('echoz3app/', include('echoz3app.urls')),
+    path('echozapp/index/', include('echozapp.urls')),
 ]
