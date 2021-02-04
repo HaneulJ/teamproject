@@ -52,7 +52,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-12 col-lg-6 d-flex">
-            <a href="index.html" class="site-logo">
+            <a href="/echozapp/index/" class="site-logo">
               Zero Waste
             </a>
 
@@ -94,23 +94,23 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">
                 <li class="active">
-                  <a href="index.html" class="nav-link text-left">Home</a>
+                  <a href="/echozapp/index/" class="nav-link text-left">Home</a>
                 </li>
                 <li>
-                  <a href="categories.html" class="nav-link text-left">What?</a>
+                  <a href='{% static "What.html" %}' class="nav-link text-left">What?</a>
                 </li>
                 <li>
-                  <a href="categories.html"  class="nav-link text-left">How?</a>
+                  <a href='{% static "How.html" %}'  class="nav-link text-left">How?</a>
                 </li>
                 <li>
-                  <a href= "categories.html"   class="nav-link text-left">Where?</a>
+                  <a href='{% static "Where.html" %}'  class="nav-link text-left">Where?</a>
                 </li>
                 <li>
-                    <a href="categories.html"  class="nav-link text-left">Event</a>
+                    <a href='{% static "Events.html" %}'  class="nav-link text-left">Events</a>
                 </li>
-                <li><a href= "categories.html"  class="nav-link text-left">Board</a></li>
+                <li><a href='{% static "Board.html" %}'  class="nav-link text-left">Board</a></li>
 
-                <li><a href="contact.html" class="nav-link text-left">Contact</a></li>
+                <li><a href='{% static "contact.html" %}' class="nav-link text-left">Contact</a></li>
               </ul>                                                                                                                                                                                                                                                                                         
             </nav>
 
@@ -129,11 +129,11 @@
         <div class="site-section">
           <div class="container">
             <div class="half-post-entry d-block d-lg-flex bg-light">
-              <div class="img-bg" style="background-image: url('{% static 'images/bigdata.jpg' %}')"></div>
+              <div class="img-bg" style="background-image: url('{% static 'images/1.png' %}')"></div>
               <div class="contents">
                 <span class="caption">What is Zero Waste?</span>
-                <h2><a href="blog-single.html" >제품의 흐름을 크게 바꾸어 낭비가 없는 사회</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate vero obcaecati natus adipisci necessitatibus eius, enim vel sit ad reiciendis. Enim praesentium magni delectus cum, tempore deserunt aliquid quaerat culpa nemo veritatis, iste adipisci excepturi consectetur doloribus aliquam accusantium beatae?</p>
+                <h2><a href='{% static "blog-single.html" %}' >쓰레기가 나오지 않는 삶</a></h2>
+                <p class="mb-3"><br>모든 제품, 포장 및 자재를 태우지 않고, 환경이나 인간의 건강을 위협할 수 있는 토지, 해양, 공기로 배출하지 않으며 책임 있는 생산, 소비, 재사용 및 회수를 통해 모든 자원을 보존하는 것.<br><br>목표: 제품의 흐름을 크게 바꾸어 낭비가 없는 사회<br></p>
                 
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">Food</a></span>
@@ -148,14 +148,19 @@
         <div class="site-section">
           <div class="container">
             <div class="half-post-entry d-block d-lg-flex bg-light">
-              <div class="img-bg" style="background-image: url('{% static 'images/big_img_1.jpg' %}')"></div>
+              <div class="img-bg" style="background-image: url('{% static 'images/11.png' %}')"></div>
               <div class="contents">
-                <span class="caption">Editor's Pick</span>
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate vero obcaecati natus adipisci necessitatibus eius, enim vel sit ad reiciendis. Enim praesentium magni delectus cum, tempore deserunt aliquid quaerat culpa nemo veritatis, iste adipisci excepturi consectetur doloribus aliquam accusantium beatae?</p>
+                <span class="caption">How to practice Zero Waste?</span>
+                <h2><a href='{% static "blog-single.html" %}'>제로 웨이스트 5가지 가이드라인</a></h2>
+                <p class="mb-3"><ul>
+                <li> Refuse: 필요하지 않는 것은 소비하지 않을 것 </li>
+                <li> Reduce: 어쩔 수 없이 소비해야 한다면 최대한 사용량을 줄일 것</li>
+                <li> Reduce: 어쩔 수 없이 소비해야 한다면 최대한 사용량을 줄일 것</li>
+                <li> Reuse: 모든 자원은 가능한 한 재사용할 것</li>
+                <li> Recycle: 더 이상 사용할 수 없는 자원은 재활용할 것</li> </ul></p>
                 
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">Food</a></span>
+                  <span class="d-block"><a href="#">Bea Johnson</a> in <a href="#">Blog</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
 
@@ -176,52 +181,52 @@
             <div class="row">
               <div class="col-12">
                 <div class="section-title">
-                  <h2>Editor's Pick</h2>
+                  <h2><a href='{% static "How.html" %}' >How to do Zero Waste</a></h2>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="post-entry-1">
-                  <a href="blog-single.html"><img src='{% static "images/img_h_1.jpg" %}' alt="Image" class="img-fluid"></a>
-                  <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                  <a href='{% static "checklist0.html" %}'><img src='{% static "images/6.jpg" %}' alt="Image" class="img-fluid"></a>
+                  <h2><a href='{% static  "checklist0.html" %}'>우리 함께 시작해 볼까요?</a></h2>
+                  <p>코 앞으로 닥친 쓰레기 대란으로 환경에 대한 관심이 그 어느 때보다 뜨겁죠? 나와 지구를 생각하는 라이프 스타일을 꿈꾼다면 꼭 알아야 할 '제로 웨이스트'에 관한 이야기!</p>
                   <div class="post-meta">
-                    <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                    <span class="d-block"><a href="#">소지현</a> in <a href="#">News</a></span>
                     <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="post-entry-2 d-flex bg-light">
-                  <div class="thumbnail" style="background-image: url('{% static 'images/img_v_1.jpg' %}')"></div>
+                  <div class="thumbnail" style="background-image: url('{% static 'images/check_lv1_2.jpg' %}')"></div>
                   <div class="contents">
-                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                    <h2><a href='{% static "checklist1.html" %}'>Lv.1 오늘의 체크리스트</a></h2>
                     <div class="post-meta">
-                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                      <span class="d-block"><a href="#">박지현</a> in <a href="#">echoz</a></span>
+                      <span class="date-read">Feb 4 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                     </div>
                   </div>
                 </div>
 
                 <div class="post-entry-2 d-flex">
-                  <div class="thumbnail" style="background-image: url('{% static 'images/img_v_2.jpg' %}')"></div>
+                  <div class="thumbnail" style="background-image: url('{% static 'images/check_lv2_1.jpg' %}')"></div>
                   <div class="contents">
-                    <h2><a href="blog-single.html" >News Needs to Meet Its Audiences Where They Are</a></h2>
+                    <h2><a href='{% static "checklist2.html" %}'>Lv.2 오늘의 체크리스트</a></h2>
                     <div class="post-meta">
-                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                      <span class="d-block"><a href="#">정하늘</a> in <a href="#">echoz</a></span>
+                      <span class="date-read">Feb 5 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                     </div>
                   </div>
                 </div>
 
                 <div class="post-entry-2 d-flex">
-                  <div class="thumbnail" style="background-image: url('{% static 'images/img_v_3.jpg' %}' )"></div>
+                  <div class="thumbnail" style="background-image: url('{% static 'images/check_lv3_1.jpg' %}' )"></div>
                   <div class="contents">
-                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                    <h2><a href='{% static "checklist3.html" %}'>Lv.3 오늘의 체크리스트 </a></h2>
                     <div class="post-meta">
-                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                      <span class="d-block"><a href="#">정하늘</a> in <a href="#">echoz</a></span>
+                      <span class="date-read">Feb 8 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                     </div>
                   </div>
                 </div>
@@ -230,15 +235,15 @@
           </div>
           <div class="col-lg-4">
             <div class="section-title">
-              <h2>Trending</h2>
+              <h2><a href='{% static "What.html" %}'>Recent News</a></h2>
             </div>
 
             <div class="trend-entry d-flex">
               <div class="number align-self-start">01</div>
               <div class="trend-contents">
-                <h2><a href= "blog-single.html" >News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static  "news1.html" %}'>친환경을 넘은 필(必)환경시대! ‘제로웨이스트’ 열풍</a></h2>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">김지윤</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
@@ -247,9 +252,9 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">02</div>
               <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "news2.html" %}'>"환경오염 문제 관심 가져야죠" '친환경 소비'로 눈 돌린 20·30</a></h2>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">김가연</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
@@ -258,9 +263,9 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">03</div>
               <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "news3.html" %}'>쓰레기 넘치는 코로나 시대, '제로웨이스트'가 뜬다</a></h2>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">곽지혜</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
@@ -269,16 +274,16 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">04</div>
               <div class="trend-contents">
-                <h2><a href="blog-single.html" News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "news4.html" %}'>유통가에 제로 웨이스트 바람 분다</a></h2>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">신유미</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
             </div>
             
             <p>
-              <a href="#" class="more">See All Trends <span class="icon-keyboard_arrow_right"></span></a>
+              <a href='{% static "What.html" %}' class="more">See All Trends <span class="icon-keyboard_arrow_right"></span></a>
             </p>
 
           </div>
@@ -287,36 +292,17 @@
     </div>
     <!-- END section -->
 
-    <div class="py-0">
-      <div class="container">
-        <div class="half-post-entry d-block d-lg-flex bg-light">
-          <div class="img-bg" style="background-image: url('{% static 'images/big_img_1.jpg' %}')"></div>
-          <div class="contents">
-            <span class="caption">Editor's Pick</span>
-            <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-            <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate vero obcaecati natus adipisci necessitatibus eius, enim vel sit ad reiciendis. Enim praesentium magni delectus cum, tempore deserunt aliquid quaerat culpa nemo veritatis, iste adipisci excepturi consectetur doloribus aliquam accusantium beatae?</p>
-            
-            <div class="post-meta">
-              <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">Food</a></span>
-              <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="site-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <div class="section-title">
-              <h2>Politics</h2>
+              <h2><a href='{% static "How.html" %}'>How?</a></h2>
             </div>
             <div class="post-entry-2 d-flex">
-              <div class="thumbnail" style="background-image: url('{% static 'images/img_v_1.jpg' %}')"></div>
+              <div class="thumbnail" style="background-image: url('{% static 'images/2_2.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href= "blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}'>1. In Kitchen</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
@@ -327,7 +313,7 @@
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/img_v_2.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}'>2. In Bathroom</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
@@ -338,7 +324,7 @@
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/img_v_3.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}'>News Needs to Meet Its Audiences Where They Are</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
@@ -349,37 +335,37 @@
           </div>
           <div class="col-lg-6">
             <div class="section-title">
-              <h2>Business</h2>
+              <h2><a href='{% static "Where.html" %}'>Shops</a></h2>
             </div>
             <div class="post-entry-2 d-flex">
-              <div class="thumbnail" style="background-image: url('{% static 'images/img_v_1.jpg' %}')"></div>
+              <div class="thumbnail" style="background-image: url('{% static 'images/thepicker1.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href="blog-single.html" >News Needs to Meet Its Audiences Where They Are</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                <h2><a href='{% static "shop1.html" %}' >The Picker 한국 최초의 제로 웨이스트 마켓</a></h2>
+                <p class="mb-3">건강한 소비가 만드는 건강한 지구</p>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">서울숲</a> in <a href="#">Seoul</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
             </div>
             <div class="post-entry-2 d-flex">
-              <div class="thumbnail" style="background-image: url('{% static 'images/img_v_2.jpg' %}')"></div>
+              <div class="thumbnail" style="background-image: url('{% static 'images/earth2.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                <h2><a href='{% static "shop2.html" %}'>지구</a></h2>
+                <p class="mb-3">많은 사람이 일상처럼 친환경 삶을 접하길 바라는 마음</p>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">동작구</a> in <a href="#">Seoul</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
             </div>
             <div class="post-entry-2 d-flex">
-              <div class="thumbnail" style="background-image: url('{% static 'images/img_v_3.jpg' %}')"></div>
+              <div class="thumbnail" style="background-image: url('{% static 'images/bottle2.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                <h2><a href='{% static "shop3.html" %}'>Bottle Factory</a></h2>
+                <p class="mb-3">일회용이 하나도 없는 카페</p>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">연희동</a> in <a href="#">Seoul</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
@@ -396,15 +382,15 @@
         <div class="row">
           <div class="col-lg-9">
             <div class="section-title">
-              <h2>Recent News</h2>
+              <h2><a href='{% static "Board.html" %}'>My ways</a></h2>
             </div>
             <div class="post-entry-2 d-flex">
-              <div class="thumbnail order-md-2" style="background-image: url('{% static 'images/img_h_4.jpg' %}')"></div>
+              <div class="thumbnail order-md-2" style="background-image: url('{% static 'images/b1.jpg' %}')"></div>
               <div class="contents order-md-1 pl-0">
-                <h2><a href="blog-single.html" >News Needs to Meet Its Audiences Where They Are</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                <h2><a href='{% static "blog-single.html" %}'>"나는 쓰레기 없이 산다"</a></h2>
+                <p class="mb-3">생활은 가벼워지고 삶은 건강해지는 쓰레기 제로 라이프</p>
                 <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                  <span class="d-block"><a href="#">Bea Johnson</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                 </div>
               </div>
@@ -413,7 +399,7 @@
             <div class="post-entry-2 d-flex">
               <div class="thumbnail order-md-2" style="background-image: url('{% static 'images/img_h_3.jpg' %}')"></div>
               <div class="contents order-md-1 pl-0">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}'>News Needs to Meet Its Audiences Where They Are</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
@@ -426,7 +412,7 @@
               <div class="thumbnail order-md-2" style= "background-image: url('{% static 'images/img_h_3.jpg' %}' )"></div>
               <div class="contents order-md-1 pl-0">
                 <span class="caption mb-4 d-block">Editor's Pick</span>
-                <h2><a href="blog-single.html" >News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}' >News Needs to Meet Its Audiences Where They Are</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
@@ -437,13 +423,13 @@
           </div>
           <div class="col-lg-3">
             <div class="section-title">
-              <h2>Popular Posts</h2>
+              <h2><a href='{% static "Events.html" %}'>Events</a></h2>
             </div>
 
             <div class="trend-entry d-flex">
               <div class="number align-self-start">01</div>
               <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}'> 2020년 12월 이벤트 당첨</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -454,7 +440,7 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">02</div>
               <div class="trend-contents">
-                <h2><a href="blog-single.html" >News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}'>2021년 1월 이벤트 당첨</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -465,7 +451,7 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">03</div>
               <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                <h2><a href='{% static "blog-single.html" %}'>2021년 2월 이벤트</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -473,16 +459,6 @@
               </div>
             </div>
 
-            <div class="trend-entry d-flex pl-0">
-              <div class="number align-self-start">04</div>
-              <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                  <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
-                </div>
-              </div>
-            </div>
             
             <p>
               <a href="#" class="more">See All Popular <span class="icon-keyboard_arrow_right"></span></a>
@@ -492,12 +468,7 @@
 
         <div class="row">
           <div class="col-lg-6">
-            <ul class="custom-pagination list-unstyled">
-              <li><a href="#">1</a></li>
-              <li class="active">2</li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-            </ul>
+
           </div>
         </div>
       </div>
