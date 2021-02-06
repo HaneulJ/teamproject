@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class Echoz2AppConfig(AppConfig):
+class EchozAppConfig(AppConfig):
     name = 'echozapp'
