@@ -2,48 +2,29 @@
 
 {% block content %}
 
+
+   <!-- 게시판 시작-->
     <div class="site-section bg-light">
       <div class="container">
+        <div class="row">
 
-            <div class="row justify-content-md-center">
-			    <div class="col-md-6 col-md-offset-3">
-				    <form id="register-form" action="{% url 'register' %}" method="POST" role="form" >
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <input type="email" name="useremail" id="useremail" tabindex="1" class="form-control" placeholder="Useremail" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="firstname" id="firstname" tabindex="1" class="form-control" placeholder="User firstname" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="lastname" id="lastname" tabindex="1" class="form-control" placeholder="User lastname" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="repassword" id="repassword" tabindex="2" class="form-control" placeholder="Confirm Password" required>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="text-center">
-                                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+          <div class="col-lg-12">
+            <div class="section-title mb-5">
+              <h2>My page</h2>
 
-			    </div>
-		  </div>
-
-
-
+            </div>
+          </div>
+        </div>
+        <!-- 시작-->
+        <div class="row">
+          <div class="col-lg-12">
+            <a>NAME:  {{loginuser}} </a>
+          </div>
+        </div>
       </div>
+
     </div>
-
-
+    <!-- 게시판 끝-->
 
 
 

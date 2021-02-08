@@ -1,128 +1,7 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
 {% load static %}
-<html lang="ko">
-
-<head>
-  <title>echoz &mdash; Zero Waste</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-  <link href="https://fonts.googleapis.com/css?family=B612+Mono|Cabin:400,700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href= '{% static "fonts/icomoon/style.css" %}'>
-
-  <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'>
-  <link rel="stylesheet" href='{% static "css/jquery-ui.css" %}'>
-  <link rel="stylesheet" href='{% static "css/owl.carousel.min.css" %}'>
-  <link rel="stylesheet" href='{% static "css/owl.theme.default.min.css" %}'>
-  <link rel="stylesheet" href='{% static "css/owl.theme.default.min.css" %}'>
-
-  <link rel="stylesheet" href='{% static "css/jquery.fancybox.min.css" %}'>
-
-  <link rel="stylesheet" href='{% static "css/bootstrap-datepicker.css" %}'>
-
-  <link rel="stylesheet" href='{% static "fonts/flaticon/font/flaticon.css" %}'>
-
-  <link rel="stylesheet" href='{% static "css/aos.css" %}'>
-  <link href='{% static "css/jquery.mb.YTPlayer.min.css"%}' media="all" rel="stylesheet" type="text/css">
-
-  <link rel="stylesheet" href='{% static "css/style.css" %}'>
-
-
-
-</head>
-
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-
-  <div class="site-wrap">
-
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div>
-
-
-    
-    <div class="header-top">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-12 col-lg-6 d-flex">
-            <a href="/echozapp/index/" class="site-logo">
-              Zero Waste
-            </a>
-
-            <a href="#" class="ml-auto d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black"><span
-                class="icon-menu h3"></span></a>
-
-          </div>
-          <div class="col-12 col-lg-6 ml-auto d-flex">
-            <div class="ml-md-auto top-social d-none d-lg-inline-block">
-              <a href="#" class="d-inline-block p-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="d-inline-block p-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="d-inline-block p-3"><span class="icon-instagram"></span></a>
-            </div>
-            <form action="#" class="search-form d-inline-block">
-
-              <div class="d-flex">
-                <input type="email" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-secondary" ><span class="icon-search"></span></button>
-              </div>
-            </form>
-
-            
-          </div>
-          <div class="col-6 d-block d-lg-none text-right">
-            
-          </div>
-        </div>
-      </div>
-      
-
-
-      
-      <div class="site-navbar py-2 js-sticky-header site-navbar-target d-none pl-0 d-lg-block" role="banner">
-
-      <div class="container">
-        <div class="d-flex align-items-center">
-          
-          <div class="mr-auto">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">
-                <li class="active">
-                  <a href="/echozapp/index/" class="nav-link text-left">Home</a>
-                </li>
-                <li>
-                  <a href='{% static "What.html" %}' class="nav-link text-left">What?</a>
-                </li>
-                <li>
-                  <a href='{% static "How.html" %}'  class="nav-link text-left">How?</a>
-                </li>
-                <li>
-                  <a href='{% static "Where.html" %}'  class="nav-link text-left">Where?</a>
-                </li>
-                <li>
-                    <a href='{% static "Events.html" %}'  class="nav-link text-left">Events</a>
-                </li>
-                <li><a href='{% static "Board.html" %}'  class="nav-link text-left">Board</a></li>
-
-                <li><a href="/accountapp/login/" class="nav-link text-left">Login</a></li>
-              </ul>                                                                                                                                                                                                                                                                                         
-            </nav>
-
-          </div>
-         
-        </div>
-      </div>
-
-    </div>
-    
-    </div>
-
     <div class="site-section py-0">
       <div class="owl-carousel hero-slide owl-style">
 
@@ -132,7 +11,7 @@
               <div class="img-bg" style="background-image: url('{% static 'images/1.png' %}')"></div>
               <div class="contents">
                 <span class="caption">What is Zero Waste?</span>
-                <h2><a href='{% static "blog-single.html" %}' >쓰레기가 나오지 않는 삶</a></h2>
+                <h2><a href="/echozapp/What/" >쓰레기가 나오지 않는 삶</a></h2>
                 <p class="mb-3"><br>모든 제품, 포장 및 자재를 태우지 않고, 환경이나 인간의 건강을 위협할 수 있는 토지, 해양, 공기로 배출하지 않으며 책임 있는 생산, 소비, 재사용 및 회수를 통해 모든 자원을 보존하는 것.<br><br>목표: 제품의 흐름을 크게 바꾸어 낭비가 없는 사회<br></p>
                 
                 <div class="post-meta">
@@ -151,7 +30,7 @@
               <div class="img-bg" style="background-image: url('{% static 'images/beginner.jpg' %}')"></div>
               <div class="contents">
                 <span class="caption">How to practice Zero Waste?</span>
-                <h2><a href='{% static "blog-single.html" %}'>제로 웨이스트 5가지 가이드라인</a></h2>
+                <h2><a href="/echozapp/How/">제로 웨이스트 5가지 가이드라인</a></h2>
                 <p class="mb-3"><ul>
                 <li> Refuse: 필요하지 않는 것은 소비하지 않을 것 </li>
                 <li> Reduce: 어쩔 수 없이 소비해야 한다면 최대한 사용량을 줄일 것</li>
@@ -181,15 +60,15 @@
             <div class="row">
               <div class="col-12">
                 <div class="section-title">
-                  <h2><a href='{% static "What.html" %}' >About Zero Waste</a></h2>
+                  <h2><a href='/echozapp/What/' >About Zero Waste</a></h2>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="post-entry-1">
-                  <a href="https://www.google.com/search?q=%EC%8B%9D%EB%B2%A4%EC%A0%B8%EC%8A%A4&amp;sxsrf=ALeKk02UaZ_izRuzgbpvnvxqlejih6jEdQ:1612502080035&amp;source=lnms&amp;tbm=vid&amp;sa=X&amp;ved=2ahUKEwiL-Let_tHuAhXLE4gKHXxoCz4Q_AUoAnoECAQQBA"><img src='{% static "images/v1.jpg" %}' alt="Image" class="img-fluid"></a>
-                  <h2><a href="https://www.google.com/search?q=%EC%8B%9D%EB%B2%A4%EC%A0%B8%EC%8A%A4&amp;sxsrf=ALeKk02UaZ_izRuzgbpvnvxqlejih6jEdQ:1612502080035&amp;source=lnms&amp;tbm=vid&amp;sa=X&amp;ved=2ahUKEwiL-Let_tHuAhXLE4gKHXxoCz4Q_AUoAnoECAQQBA">'식벤져스' 제로 웨이스트 레스토랑 오픈</a></h2>
+                  <a href='/echozapp/video1/'><img src='{% static "images/v1.jpg" %}' alt="Image" class="img-fluid"></a>
+                  <h2><a href='/echozapp/video1/'>'식벤져스' 제로 웨이스트 레스토랑 오픈</a></h2>
                   <p>최상의 상태임에도 당일 소진되지 못해 처분 위기에 놓인 식자재부터 파 뿌리처럼 버려지기 쉬운 식자재까지 남김없이 활용해 새로운 메뉴로 탈바꿈시킨다!</p>
                   <div class="post-meta">
                     <span class="d-block"><a href="#">식벤져스</a> in <a href="#">Olive</a></span>
@@ -201,7 +80,7 @@
                 <div class="post-entry-2 d-flex bg-light">
                   <div class="thumbnail" style="background-image: url('{% static 'images/v2_1.jpg' %}')"></div>
                   <div class="contents">
-                    <h2><a href="https://www.youtube.com/watch?v=8oaBBL4azdQ">지구를 지켜츄</a></h2>
+                    <h2><a href='/echozapp/video2/'>지구를 지켜츄</a></h2>
                     <div class="post-meta">
                       <span class="d-block"><a href="#">Chuu Can Do It</a> in <a href="#">Youtube</a></span>
                       <span class="date-read">>Jan 7<span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -212,7 +91,7 @@
                 <div class="post-entry-2 d-flex">
                   <div class="thumbnail" style="background-image: url('{% static 'images/v3_1.jpg' %}')"></div>
                   <div class="contents">
-                    <h2><a href='https://www.youtube.com/watch?v=Z6vjJuqhNHA'>윤스테이만의 친환경 어메니티</a></h2>
+                    <h2><a href='/echozapp/video3/'>윤스테이만의 친환경 어메니티</a></h2>
                     <div class="post-meta">
                       <span class="d-block"><a href="#">윤스테이</a> in <a href="#">tvn</a></span>
                       <span class="date-read">Jan 11<span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -223,25 +102,37 @@
                 <div class="post-entry-2 d-flex">
                   <div class="thumbnail" style="background-image: url('{% static 'images/v4_1.jpg' %}' )">></div>
                   <div class="contents">
-                    <h2><a href='https://www.youtube.com/watch?v=m6s4DqEoiE8'>지속가능한 것을 행복한 만큼 실천하세요</a></h2>
+                    <h2><a href='/echozapp/video4/'>지속가능한 것을 행복한 만큼 실천하세요</a></h2>
                     <div class="post-meta">
                       <span class="d-block"><a href="#">박진희</a> in <a href="#">세바시</a></span>
                       <span class="date-read">May 27<span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
                     </div>
                   </div>
                 </div>
+
+                <div class="post-entry-2 d-flex">
+                  <div class="thumbnail" style="background-image: url('{% static 'images/v5.jpg' %}')"></div>
+                  <div class="contents">
+                    <h2><a href='/echozapp/video5/'>톱 모델 이현이가 에코 라이프에 도전한 이유</a></h2>
+                    <div class="post-meta">
+                      <span class="d-block"><a href="#">커버스토리</a> in <a href="#">tvn</a></span>
+                      <span class="date-read">Jun 13<span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="section-title">
-              <h2><a href='{% static "What.html" %}'>Recent News</a></h2>
+              <h2><a href='/echozapp/What/'>Recent News</a></h2>
             </div>
 
             <div class="trend-entry d-flex">
               <div class="number align-self-start">01</div>
               <div class="trend-contents">
-                <h2><a href='{% static  "news1.html" %}'>친환경을 넘은 필(必)환경시대! ‘제로웨이스트’ 열풍</a></h2>
+                <h2><a href='/echozapp/news1/'>친환경을 넘은 필(必)환경시대! ‘제로웨이스트’ 열풍</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">김지윤</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -252,7 +143,7 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">02</div>
               <div class="trend-contents">
-                <h2><a href='{% static "news2.html" %}'>"환경오염 문제 관심 가져야죠" '친환경 소비'로 눈 돌린 20·30</a></h2>
+                <h2><a href='/echozapp/news2/'>"환경오염 문제 관심 가져야죠" '친환경 소비'로 눈 돌린 20·30</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">김가연</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -263,7 +154,7 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">03</div>
               <div class="trend-contents">
-                <h2><a href='{% static "news3.html" %}'>쓰레기 넘치는 코로나 시대, '제로웨이스트'가 뜬다</a></h2>
+                <h2><a href='/echozapp/news3/'>쓰레기 넘치는 코로나 시대, '제로웨이스트'가 뜬다</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">곽지혜</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -274,7 +165,7 @@
             <div class="trend-entry d-flex">
               <div class="number align-self-start">04</div>
               <div class="trend-contents">
-                <h2><a href='{% static "news4.html" %}'>유통가에 제로 웨이스트 바람 분다</a></h2>
+                <h2><a href='/echozapp/news4/'>유통가에 제로 웨이스트 바람 분다</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">신유미</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -283,7 +174,7 @@
             </div>
             
             <p>
-              <a href='{% static "What.html" %}' class="more">See All News<span class="icon-keyboard_arrow_right"></span></a>
+              <a href='/echozapp/What/' class="more">See All News<span class="icon-keyboard_arrow_right"></span></a>
             </p>
 
           </div>
@@ -297,12 +188,12 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="section-title">
-              <h2><a href='{% static "How.html" %}'>How?</a></h2>
+              <h2><a href='/echozapp/How/'>How?</a></h2>
             </div>
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/2_3.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href='{% static "tip1.html" %}'>1. In Kitchen</a></h2>
+                <h2><a href='/echozapp/tip1/'>1. In Kitchen</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">박지현</a> in <a href="#">echoz</a></span>
@@ -313,7 +204,7 @@
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/3_3.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href='{% static "tip2.html" %}'>2. In Bathroom</a></h2>
+                <h2><a href='/echozapp/tip2/'>2. In Bathroom</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">박희망</a> in <a href="#">echoz</a></span>
@@ -324,7 +215,7 @@
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/travel_1.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href='{% static "tip3.html" %}'>In Travel</a></h2>
+                <h2><a href='/echozapp/tip3/'>3. In Travel</a></h2>
                 <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">박지현</a> in <a href="#">echoz</a></span>
@@ -335,12 +226,12 @@
           </div>
           <div class="col-lg-6">
             <div class="section-title">
-              <h2><a href='{% static "Where.html" %}'>Stores</a></h2>
+              <h2><a href='/echozapp/Where/'>Stores</a></h2>
             </div>
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/thepicker1.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href='{% static "shop1.html" %}' >한국 최초의 제로 웨이스트 마켓 The Picker</a></h2>
+                <h2><a href='/echozapp/shop1/' >한국 최초의 제로 웨이스트 마켓 The Picker</a></h2>
                 <p class="mb-3">건강한 소비가 만드는 건강한 지구</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">서울숲</a> in <a href="#">Seoul</a></span>
@@ -351,7 +242,7 @@
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/earth2.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href='{% static "shop2.html" %}'>지구</a></h2>
+                <h2><a href='/echozapp/shop2/'>지구</a></h2>
                 <p class="mb-3">많은 사람이 일상처럼 친환경 삶을 접하길 바라는 마음</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">동작구</a> in <a href="#">Seoul</a></span>
@@ -362,7 +253,7 @@
             <div class="post-entry-2 d-flex">
               <div class="thumbnail" style="background-image: url('{% static 'images/bottle2.jpg' %}')"></div>
               <div class="contents">
-                <h2><a href='{% static "shop3.html" %}'>Bottle Factory</a></h2>
+                <h2><a href='/echozapp/shop3/'>Bottle Factory</a></h2>
                 <p class="mb-3">일회용이 하나도 없는 카페</p>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">연희동</a> in <a href="#">Seoul</a></span>
@@ -371,7 +262,7 @@
               </div>
             </div>
             <p>
-              <a href='{% static "Where.html" %}' class="more">See All Stores<span class="icon-keyboard_arrow_right"></span></a>
+              <a href='/echozapp/Where/' class="more">See All Stores<span class="icon-keyboard_arrow_right"></span></a>
             </p>
           </div>
         </div>
@@ -385,7 +276,7 @@
         <div class="row">
           <div class="col-lg-9">
             <div class="section-title">
-              <h2><a href='{% static "Board.html" %}'>My ways</a></h2>
+              <h2><a href='/echozapp/Board/'>My ways</a></h2>
             </div>
             <div class="post-entry-2 d-flex">
               <div class="thumbnail order-md-2" style="background-image: url('{% static 'images/b1.jpg' %}')"></div>
@@ -426,13 +317,13 @@
           </div>
           <div class="col-lg-3">
             <div class="section-title">
-              <h2><a href='{% static "Events.html" %}'>Events</a></h2>
+              <h2><a href='/echozapp/Events/'>Events</a></h2>
             </div>
 
             <div class="trend-entry d-flex">
               <div class="number align-self-start">01</div>
               <div class="trend-contents">
-                <h2><a href='{% static "blog-single.html" %}'> 2020년 12월 이벤트 당첨</a></h2>
+                <h2><a href='/echozapp/event12/'> 2020년 12월 이벤트 당첨</a></h2>
                 <div class="post-meta">
                   <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
                   <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
@@ -464,7 +355,7 @@
 
             
             <p>
-              <a href="Events.html" class="more">See All Events<span class="icon-keyboard_arrow_right"></span></a>
+              <a href="/echozapp/Events/" class="more">See All Events<span class="icon-keyboard_arrow_right"></span></a>
             </p>
           </div>
         </div>
@@ -542,6 +433,4 @@
 
   <script src='{% static "js/main.js" %}'></script>
 
-</body>
-
-</html>
+{% endblock %}
