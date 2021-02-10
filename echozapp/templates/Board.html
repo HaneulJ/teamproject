@@ -2,114 +2,129 @@
 
 {% block content %}
 
-     <!-- 게시판 시작-->
-    <div class="site-section bg-light">
+<!-- 게시판 시작-->
+    <div class="site-section">
       <div class="container">
         <div class="row">
 
           <div class="col-lg-12">
             <div class="section-title mb-5">
               <h2>게시판</h2>
-              <button id="write" style="float:right;  background-color: white; color:black; opacity:0.8;" type="button" class="btn">Write</button>
+              {% if user.is_authenticated %}
+                <div ><button id="write" onclick="displayInputForm()" style="float:right;  background-color: white; color:black; opacity:0.8;" type="button" class="btn">Write</button></div>
+              {%else%}
+
+              {% endif %}
             </div>
           </div>
         </div>
-          <!-- 검색시작 -->
-
-          <!-- 검색 페이징 -->
-
-
         <!-- 게시판 시작-->
-        <table class="table table-hover">
-          <thead>
-              <tr>
-                    <th style="width:10%;">번호</th>
-                    <th style="width:30%; text-align:center;">제목</th>
-                    <th style="width:10%;">아이디</th>
-                    <th style="width:10%;">조회수</th>
-                    <th style="width:10%;">추천수</th>
-                    <th style="width:20%;">작성날짜</th>
-              </tr>
-          </thead>
-          <tbody>
-                <!-- 나중에 변수 작성
-                {% for xxx in xxx%}
-                -->
+
+            <p>총 게시글: {{boardcount}}</p>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <!--<th style="width:10%;">번호</th>-->
+                        <th style="width:30%; text-align:center;">제목</th>
+                        <th style="width:10%;">아이디</th>
+                        <th style="width:10%;">조회수</th>
+                        <!--<th style="width:10%;">추천수</th>-->
+                        <th style="width:20%;">작성날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- 나중에 변수 작성( 게시글 list)-->
+
+
+                {% for wdata in vlist %}
                 <tr>
-                    <td>1</td>
-                    <td >제목을 입력합니다.</td>
-                    <td>아이디</td>
-                    <td>count</td>
-                    <td>like</td>
-                    <td>date</td>
+
+                    <!--<td>{{wdata.id}}</td>-->
+                    <td onclick="Boardview({{wdata.id}})"> {{wdata.title}} </td>
+                    <td>{{request.user.username}}</td>
+                    <td>{{wdata.update_counter}}</td>
+                    <!--<td>#</td>-->
+                    <td>{{wdata.writedate}}</td>
                 </tr>
-                <!--
+
                 {% endfor %}
-                -->
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
 
 
       </div>
        <!-- Pagination 시작-->
       <ul class="pagination justify-content-center">
+          {% if vlist.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{vlist.previous_page_number}}">Previous</a></li>
+          {% else %}
+            <li class="page-item disabled"><a class="page-link"  tabindex="-1" aria-disabled="true" href="#">Previous</a></li>
+          {% endif %}
+          {% for page_number in vlist.paginator.page_range %}
 
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            {% if page_number == vlist.number %}
+                <li class="page-item active" aria-current="page"><a class="page-link" href="?page={{page_number}}"> {{page_number}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{page_number}}"> {{page_number}}</a></li>
+            {% endif%}
+
+          {% endfor %}
+
+          {% if vlist.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{vlist.next_page_number}}">Next</a></li>
+          {% else%}
+            <li class="page-item disabled"><a class="page-link"  tabindex="-1" aria-disabled="true" href="#">Next</a></li>
+          {% endif %}
+
       </ul>
-    <!-- Pagination 끝-->
+      <hr>
+      <!-- Pagination 끝-->
+
+
+
+      <div class="row justify-content-md-center">
+			<div class="col-md-6 col-md-offset-3">
+
+
+                <div id="ccform"  style="display:none;" >
+                    <h2 style="text-align: center">COMMENT</h2>
+
+	                <form method="post" action="{% url 'Boardwrite' %}" class="p-5 bg-light">
+                     {% csrf_token %}
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text" id="title" name="title" class="form-control" placeholder="제목" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Content *</label>
+		                    <textarea  class="form-control" name="content" cols="30" rows="5" placeholder="의견을 적어주세요."></textarea>
+ 		                </div>
+                        <div class="form-group">
+ 		                    <button class="btn btn-primary py-3" type="submit" value="Submit">submit</button>
+ 		                    <button class="btn btn-primary py-3" type="reset" value="Reset">reset</button> <!--화면닫기로 수정할 것-->
+                        </div>
+	                </form>
+
+                </div>
+
+            </div>
+      </div>
+
     </div>
     <!-- 게시판 끝-->
+    <script>
+        function displayInputForm(){
+            $('#ccform').css('display','block')
+        }
 
-
-
-    <div class="footer">
-      <div class="container">
-
-
-        <div class="row">
-          <div class="col-12">
-            <div class="copyright">
-                <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-  </div>
-  <!-- .site-wrap -->
-
-
-  <!-- loader -->
-  <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15"/></svg></div>
-
-  <script src="/static/js/jquery-3.3.1.min.js"></script>
-  <script src="/static/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/static/js/jquery-ui.js"></script>
-  <script src="/static/js/popper.min.js"></script>
-  <script src="/static/js/bootstrap.min.js"></script>
-  <script src="/static/js/owl.carousel.min.js"></script>
-  <script src="/static/js/jquery.stellar.min.js"></script>
-  <script src="/static/js/jquery.countdown.min.js"></script>
-  <script src="/static/js/bootstrap-datepicker.min.js"></script>
-  <script src="/static/js/jquery.easing.1.3.js"></script>
-  <script src="/static/js/aos.js"></script>
-  <script src="/static/js/jquery.fancybox.min.js"></script>
-  <script src="/static/js/jquery.sticky.js"></script>
-  <script src="/static/js/jquery.mb.YTPlayer.min.js"></script>
+        function Boardview(id){
+             location.href="{% url 'Boardview'%}?Boardview="+id;
+        }
+    </script>
 
 
 
 
-  <script src="/static/js/main.js"></script>
 {% endblock %}

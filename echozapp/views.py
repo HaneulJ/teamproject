@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib import auth
+from .models import Post
+from django.core.paginator import Paginator
 
 def index(request) :
     return render(request,'index.html')
@@ -19,17 +21,53 @@ def mypage(request):
         context ={'loginuser' : request.user.last_name+request.user.first_name}
     return render(request, 'mypage.html',context)
 
+#글작성
+def Boardwrite(request):
+
+    title = request.POST['title']
+    content = request.POST['content']
+
+    wdata = Post(title=title, content=content)
+    wdata.save()
+
+    return redirect("Board")
+
+def Board(request):
+
+    page = request.GET.get('page', 1)
+    vlist = Post.objects.all()
+    vlist = vlist.order_by('-writedate')
+    paginator = Paginator(vlist, 3)
+    vlistpage = paginator.get_page(page)
+    boardcount = Post.objects.count()
+    context = {"vlist": vlistpage,"boardcount":boardcount}
+
+    return render(request, 'Board.html',context)
+
+def Boardview(request):
+    context={}
+    id = request.GET['Boardview']
+    Boardview = Post.objects.get(pk=id)
+    context['Boardview'] = Boardview
+    return render(request, 'Boardview.html',context)
+
+def Boarddel(request):
+    id = request.GET['id']
+    view = Post.objects.get(id=id)
+    view.delete()
+    return redirect('Board')
+
 def What(request):
     return render(request, 'What.html')
+
+def What2(request):
+    return render(request, 'What2.html')
 
 def How(request):
     return render(request, 'How.html')
 
 def Where(request):
     return render(request, 'Where.html')
-
-def Board(request):
-    return render(request, 'Board.html')
 
 def Events(request):
     return render(request, 'Events.html')

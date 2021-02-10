@@ -2,29 +2,27 @@
 
 {% block content %}
 
-
-   <!-- 게시판 시작-->
+     <!-- 게시판 시작-->
     <div class="site-section">
       <div class="container">
         <div class="row">
-
+        {% if msg %}
           <div class="col-lg-12">
             <div class="section-title mb-5">
-              <h2>My page</h2>
+              <h2>{{msg}}</h2>
 
             </div>
           </div>
         </div>
-        <!-- 시작-->
-        <div class="row">
-          <div class="col-lg-12">
-            <a>NAME:  {{loginuser}} </a>
-          </div>
+        {% endif %}
+        <div class="col-lg-12">
+            <a href="{% url 'Board' %}"> 게시판으로 </a>
         </div>
       </div>
 
     </div>
-    <!-- 게시판 끝-->
+    <!-- 끝-->
+
 
 
 {% endblock %}
