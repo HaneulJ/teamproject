@@ -109,15 +109,22 @@ def video4(request):
 def video5(request):
     return render(request, 'video5.html')
 
-def event12(request):
-    return render(request, 'event12.html')
+def event121(request):
+    return render(request, 'event121.html')
 
-def event1(request):
-    return render(request, 'event1.html')
+def event1231(request):
+    return render(request, 'event1231.html')
+
+def event11(request):
+    return render(request, 'event11.html')
+
+def event131(request):
+    return render(request, 'event131.html')
 
 
-def event2(request):
-    return render(request, 'event2.html')
+def event21(request):
+    return render(request, 'event21.html')
+
 
 
 
