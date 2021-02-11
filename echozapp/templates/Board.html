@@ -31,21 +31,26 @@
                         <th style="width:10%;">조회수</th>
                         <!--<th style="width:10%;">추천수</th>-->
                         <th style="width:20%;">작성날짜</th>
+                        <th style="width:10%;">수정</th>
                     </tr>
                 </thead>
                 <tbody>
                 <!-- 나중에 변수 작성( 게시글 list)-->
 
 
-                {% for wdata in vlist %}
+                 {% for wdata in vlist %}
                 <tr>
 
                     <!--<td>{{wdata.id}}</td>-->
                     <td onclick="Boardview({{wdata.id}})"> {{wdata.title}} </td>
-                    <td>{{request.user.username}}</td>
-                    <td>{{wdata.update_counter}}</td>
+                    <td>{{wdata.author.username}}</td>
+                    <td>{{wdata.count}}</td>
                     <!--<td>#</td>-->
-                    <td>{{wdata.writedate}}</td>
+                    <td >{{wdata.writedate |date:"Y-m-d"}}</td>
+
+                    {% if wdata.author.username == request.user.username%}
+                        <td onclick="update({{ wdata.id }})">수정</td>
+                    {% endif %}
                 </tr>
 
                 {% endfor %}
@@ -103,15 +108,12 @@
  		                </div>
                         <div class="form-group">
  		                    <button class="btn btn-primary py-3" type="submit" value="Submit">submit</button>
- 		                    <button class="btn btn-primary py-3" type="reset" value="Reset">reset</button> <!--화면닫기로 수정할 것-->
+ 		                    <button class="btn btn-primary py-3" onclick="NondisplayInputForm()" >close</button>
                         </div>
 	                </form>
-
                 </div>
-
             </div>
       </div>
-
     </div>
     <!-- 게시판 끝-->
     <script>
@@ -119,8 +121,26 @@
             $('#ccform').css('display','block')
         }
 
+        function NondisplayInputForm(){
+            $('#ccform').css('display','none')
+        }
+
         function Boardview(id){
              location.href="{% url 'Boardview'%}?Boardview="+id;
+        }
+
+        function update(id) {
+            $.getJSON("{% url 'Boardupdate' %}?id="+id, function(jsonObj) {
+                $('#ccform').css('display', 'block')
+                const dom1 = $('[name="title"]');
+                const dom2 = $('[name="content"]');
+                dom1.removeAttr("placeholder");
+                dom1.attr("value", jsonObj.title);
+                dom2.removeAttr("placeholder");
+                dom2.text(jsonObj.content);
+
+                $('#ccform form').attr("action", "{% url 'Boardupdate' %}?id="+id)
+            });
         }
     </script>
 

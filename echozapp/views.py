@@ -4,6 +4,9 @@ from django.template import loader
 from django.contrib import auth
 from .models import Post
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.utils import timezone
+
 
 def index(request) :
     return render(request,'index.html')
@@ -23,17 +26,15 @@ def mypage(request):
 
 #글작성
 def Boardwrite(request):
-
     title = request.POST['title']
     content = request.POST['content']
-
-    wdata = Post(title=title, content=content)
+    author = request.user.id
+    wdata = Post(author_id = author, title=title, content=content)
     wdata.save()
 
     return redirect("Board")
 
 def Board(request):
-
     page = request.GET.get('page', 1)
     vlist = Post.objects.all()
     vlist = vlist.order_by('-writedate')
@@ -41,13 +42,14 @@ def Board(request):
     vlistpage = paginator.get_page(page)
     boardcount = Post.objects.count()
     context = {"vlist": vlistpage,"boardcount":boardcount}
-
     return render(request, 'Board.html',context)
 
 def Boardview(request):
     context={}
     id = request.GET['Boardview']
-    Boardview = Post.objects.get(pk=id)
+    Boardview = Post.objects.get(id=id)
+    Boardview.count = Boardview.count + 1
+    Boardview.save()
     context['Boardview'] = Boardview
     return render(request, 'Boardview.html',context)
 
@@ -56,6 +58,21 @@ def Boarddel(request):
     view = Post.objects.get(id=id)
     view.delete()
     return redirect('Board')
+
+def Boardupdate(request):
+    if request.method == "POST":
+        id = request.GET.get('id')
+        update = Post.objects.get(id=id)
+        update.title = request.POST['title']
+        update.content = request.POST['content']
+        update.writedate = timezone.datetime.now()
+        update.save()
+        return redirect('Board')
+    else :
+        id = request.GET.get("id")
+        update = Post.objects.get(id=id)
+        jsonContent={"title" : update.title, "content": update.content }
+        return JsonResponse( jsonContent, json_dumps_params={'ensure_ascii':False})
 
 def What(request):
     return render(request, 'What.html')

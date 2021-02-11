@@ -11,6 +11,7 @@ urlpatterns = [
     path('Board/', views.Board, name='Board'),
     path('Boardwrite/', views.Boardwrite, name='Boardwrite'),
     path('Boardview/', views.Boardview, name='Boardview'),
+    path('Boardupdate/', views.Boardupdate, name='Boardupdate'),
     path('Boarddel/', views.Boarddel, name='Boarddel'),
     path('Events/', views.Events, name='Events'),
     path('checklist0/', views.checklist0, name='checklist0'),
