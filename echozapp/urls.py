@@ -45,5 +45,5 @@ urlpatterns = [
     path('event1231/', views.event1231, name='event1231'),
     path('event131/', views.event131, name='event131'),
 
-
+    path('add_comment_to_post/', views.add_comment_to_post, name='add_comment_to_post'),
 ]

@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib import auth
-from .models import Post
+
+from .forms import CommentForm
+from .models import Post, Comment
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.utils import timezone
@@ -26,6 +28,7 @@ def mypage(request):
 
 #글작성
 def Boardwrite(request):
+
     title = request.POST['title']
     content = request.POST['content']
     author = request.user.id
@@ -35,6 +38,7 @@ def Boardwrite(request):
     return redirect("Board")
 
 def Board(request):
+
     page = request.GET.get('page', 1)
     vlist = Post.objects.all()
     vlist = vlist.order_by('-writedate')
@@ -182,9 +186,22 @@ def event21(request):
 
 
 
-
 def blogSingle(request) :
     template = loader.get_template('blog-single.html')
     return HttpResponse(template.render(None, request))
 
-# Create your views here.
+
+
+
+def add_comment_to_post(request, blog_id):
+    post = get_object_or_404(Post, pk=id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = Boardview
+            comment.save()
+            return redirect('Boardview', id)
+        else:
+            form = CommentForm()
+    return render(request, 'Boardview.html')

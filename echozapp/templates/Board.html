@@ -27,7 +27,7 @@
                     <tr>
                         <!--<th style="width:10%;">번호</th>-->
                         <th style="width:30%; text-align:center;">제목</th>
-                        <th style="width:10%;">아이디</th>
+                        <th style="width:10%;">이름</th>
                         <th style="width:10%;">조회수</th>
                         <!--<th style="width:10%;">추천수</th>-->
                         <th style="width:20%;">작성날짜</th>
@@ -43,7 +43,7 @@
 
                     <!--<td>{{wdata.id}}</td>-->
                     <td onclick="Boardview({{wdata.id}})"> {{wdata.title}} </td>
-                    <td>{{wdata.author.username}}</td>
+                    <td>{{wdata.author.last_name}}{{wdata.author.first_name}}</td>
                     <td>{{wdata.count}}</td>
                     <!--<td>#</td>-->
                     <td >{{wdata.writedate |date:"Y-m-d"}}</td>
@@ -111,9 +111,12 @@
  		                    <button class="btn btn-primary py-3" onclick="NondisplayInputForm()" >close</button>
                         </div>
 	                </form>
+
                 </div>
+
             </div>
       </div>
+
     </div>
     <!-- 게시판 끝-->
     <script>
