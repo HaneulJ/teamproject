@@ -32,14 +32,41 @@
             <a href="{% url 'Board' %}"> << 게시판으로 </a>
         </div>
 
-        <div><button id="write" onclick="displayInputForm()" style="float:right;  background-color: white; color:black; opacity:0.8;" type="button" class="btn">댓글 쓰기</button></div>
-             {% block mycontent %}
-             {% endblock %}
 
 
-          </div>
-      </div>
-    </div>
+
+!-- 댓글 목록 -->
+<h3>댓글 목록 ({{ Boardview.comment_set.all|length }})</h3>
+<!-- +length, .count 갯수 구하기-->
+<ul>
+    {% for comment in Boardview.comment_set.all %}
+    <li>
+        {{ comment.content }} - {{ comment.created_at }}
+        <a href="{% url 'Boardview:comments_edit' post.pk comment.pk %}">Edit</a>
+        <form action="{% url 'Boardview:comments_delete' post.pk comment.pk %}" method = "POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete!">
+        </form>
+    </li>
+    {% empty %}
+    <li>
+        작성된 댓글이 없습니다 :(
+    </li>
+    {% endfor %}
+</ul>
+
+<!-- 댓글 입력창 -->
+<h3>댓글 입력</h3>
+<form action="{% url 'Boardview:comments_new' Boardview.pk%}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type ="submit">
+</form>
+
+
+</div>
+</div>
+</div>
 
     <!-- 끝-->
     <script>

@@ -1,0 +1,25 @@
+{% extends 'Boardview.html' %}
+
+{% block mycontent %}
+
+          {% for comment in post.comments.all %}
+          <div class="comment">
+              <div class="date">{{ comment.comment_date}}</div>
+              <strong><a href="{% url 'Boardview' comment.comment_writer %}">{{comment.comment_writer}}</a></strong>
+              <p>{{comment.comment_contents}}</p>
+
+
+          </div>
+          {% empty %}
+          <p>No comments here yet :(</p>
+          {% endfor %}
+
+          <hr>
+          <form action ="{% url 'comment_writer' post_pk=post.pk %}" method="POST">
+              {% csrf_token %}
+              <input type="text" name="content" placeholder="Write your comments">
+              <input type="submit" value="Writer">
+          </form>
+          <hr>
+
+{% endblock %}
