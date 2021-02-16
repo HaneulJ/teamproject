@@ -7,210 +7,167 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 single-content">
+            <div class="section-title">
+              <h2>In Seoul</h2> </div>
             
             <p class="mb-5">
-              <img src= "/static/images/thepicker2.jpg" alt="Image" class="img-fluid">
-            </p>  
-            <h1 class="mb-4">
-              The Picker 한국 최초의 제로 웨이스트 마켓
-            </h1>
+            <div id="map" style="width:700px;height:500px;align:middle;"></div></p>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script>
+    <script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 10 // 지도의 확대 레벨
+    };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+    if (navigator.geolocation) {
+
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+
+        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition, message);
+
+      });
+
+    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+        message = 'geolocation을 사용할수 없어요..'
+
+    displayMarker(locPosition, message);
+    }
+
+    var imageSrc = "/static/images/saessag.png", // 마커이미지의 주소입니다
+        imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
+        imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+        markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+
+
+    // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+    function displayMarker(locPosition, message) {
+
+    // 96개의 상점마커가 표시될 위치입니다
+    var markerPosition = [ {% for latlng in latlng.all %}
+    {   content: '<div class="wrap">{{latlng.name}}<br>{{latlng.address}}<br><a href="{{latlng.homepage}}">Homepage</a></div>',
+        latlng: new kakao.maps.LatLng({{latlng.lat}}, {{latlng.lng}})
+    },
+    {% endfor %} ];
+
+    for (var i = 0; i < markerPosition.length; i ++) {
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: markerPosition[i].latlng,
+            image: markerImage // 마커의 위치
+        });
+
+    // 마커에 표시할 인포윈도우를 생성합니다
+       var infowindow = new kakao.maps.InfoWindow(
+    	  {content: markerPosition[i].content , removable : true}
+       );
+
+    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    (function(marker, infowindow) {
+        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다
+        kakao.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);});
+        })(marker, infowindow);
+    }
+
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition
+    });
+
+    map.setCenter(locPosition);
+    }
+    </script>
+
             <div class="post-meta d-flex mb-5">
               <div class="bio-pic mr-3">
-                <img src="/static/images/person_1.jpg" alt="Image" class="img-fluidid">
+                <img src="/static/images/CH.jpg" alt="Image" class="img-fluidid">
               </div>
               <div class="vcard">
-                <span class="d-block"><a href="#">정하늘</a> in <a href="#">echoz</a></span>
-                <span class="date-read">Feb 4</span>
+                <span class="d-block"><a href="#">황창하</a> in <a href="#">Seoul</a></span>
+                  <span class="date-read">Jun 14</span>
               </div>
             </div>
-
-            <p> 더피커는 제철 과일이나 채소, 곡류 등 총 30여 가지 식료품의 불필요한 포장을 벗겨 바구니와 디스펜서에 담아 손님들은 쓰레기 없이 장을 볼 수 있게 했다. </p>
-            <p> 기본적으로 물건을 담을 용기를 집에서 가져오게 했고, 미처 준비하지 못한 이들을 위해 생분해 케이스나 친환경 제품도 함께 판매하고 있다. 처음에는 낯설어하는 손님도 많았으나 현재는 용기를 직접 가져온 사람이 늘어나며 제로 웨이스트 라이프스타일을 삶에 적용하는 이가 늘었다고 한다.</p>
-            <p> 현재는 서울숲 헤이그라운드 2호점 건물로 옮겨 좀 더 다채로운 방면으로 친환경 문화를 선도하고 있다.<br> 채식 인증샷 #Eat4Earth 프로젝트, 제로 웨이스트 라이프스타일을 다짐하는 #그린다짐2020 릴레이 이벤트 등 지속 가능한 소비문화의 모델하우스 역할을 수행하고 있다.</p>
-
-            <p> 위치 & 전화 번호 추가!!</p>
-
-
-
-            <div class="pt-5">
-                    <p>Categories:  <a href="#">eco</a>, <a href="#">checklist</a>  Tags: <a href="#">#zerowaste</a>, <a href="#">#trends</a></p>
-                  </div>
-      
-      
-                  <div class="pt-5">
-                    <div class="section-title">
-                      <h2 class="mb-5">6 Comments</h2>
-                    </div>
-                    <ul class="comment-list">
-                      <li class="comment">
-                        <div class="vcard bio">
-                          <img src="/static/images/person_1.jpg" alt="Image placeholder">
-                        </div>
-                        <div class="comment-body">
-                          <h3>Jean Doe</h3>
-                          <div class="meta">January 9, 2018 at 2:21pm</div>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                          <p><a href="#" class="reply">Reply</a></p>
-                        </div>
-                      </li>
-      
-                      <li class="comment">
-                        <div class="vcard bio">
-                          <img src="/static/images/person_1.jpg" alt="Image placeholder">
-                        </div>
-                        <div class="comment-body">
-                          <h3>Jean Doe</h3>
-                          <div class="meta">January 9, 2018 at 2:21pm</div>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                          <p><a href="#" class="reply">Reply</a></p>
-                        </div>
-      
-                        <ul class="children">
-                          <li class="comment">
-                            <div class="vcard bio">
-                              <img src="/static/images/person_1.jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                              <h3>Jean Doe</h3>
-                              <div class="meta">January 9, 2018 at 2:21pm</div>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                              <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-      
-      
-                            <ul class="children">
-                              <li class="comment">
-                                <div class="vcard bio">
-                                  <img src="/static/images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                  <h3>Jean Doe</h3>
-                                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                  <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-      
-                                  <ul class="children">
-                                    <li class="comment">
-                                      <div class="vcard bio">
-                                        <img src="/static/images/person_1.jpg" alt="Image placeholder">
-                                      </div>
-                                      <div class="comment-body">
-                                        <h3>Jean Doe</h3>
-                                        <div class="meta">January 9, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                      </div>
-                                    </li>
-                                  </ul>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-      
-                      <li class="comment">
-                        <div class="vcard bio">
-                          <img src="/static/images/person_1.jpg" alt="Image placeholder">
-                        </div>
-                        <div class="comment-body">
-                          <h3>Jean Doe</h3>
-                          <div class="meta">January 9, 2018 at 2:21pm</div>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                          <p><a href="#" class="reply">Reply</a></p>
-                        </div>
-                      </li>
-                    </ul>
-                    <!-- END comment-list -->
-                    
-                    <div class="comment-form-wrap pt-5">
-                      <div class="section-title">
-                        <h2 class="mb-5">Leave a comment</h2>
-                      </div>
-                      <form action="#" class="p-5 bg-light">
-                        <div class="form-group">
-                          <label for="name">Name *</label>
-                          <input type="text" class="form-control" id="name">
-                        </div>
-                        <div class="form-group">
-                          <label for="email">Email *</label>
-                          <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                          <label for="website">Website</label>
-                          <input type="url" class="form-control" id="website">
-                        </div>
-      
-                        <div class="form-group">
-                          <label for="message">Message</label>
-                          <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                          <input type="submit" value="Post Comment" class="btn btn-primary py-3">
-                        </div>
-      
-                      </form>
-                    </div>
-                  </div>
           </div>
 
 
-          <div class="col-lg-3 ml-auto">
+          <div class="col-lg-4 ml-auto">
             <div class="section-title">
-              <h2>Popular Stores</h2>
+              <h2>Stores List</h2>
             </div>
+          <ul>
+              <li><a href="https://www.thepicker.net/">더 피커</a>: 서울특별시 성동구 성수동1가 왕십리로 115 헤이그라운드 9층</li>
+              <li><a href="https://blog.naver.com/almangmarket">알맹상점</a></li>
+              <li><a href="https://www.instagram.com/thanksto__zerowaste.seoul">덕분애</a></li>
+              <li><a href="https://instagram.com/dear.earth.korea">디어얼스</a></li>
+              <li><a href="https://instagram.com/youmean.alot">유민얼랏</a></li>
+              <li><a href="https://instagram.com/__light_breeze">빛바람</a></li>
+              <li><a href="https://www.instagram.com/zerowaste_jigu">지구샵</a></li>
+              <li><a href="https://www.instagram.com/song_for_earth">송포어스</a></li>
+              <li><a href="https://instagram.com/hug_a_whale">허그어웨일</a></li>
+              <li><a href="https://cafe.naver.com/byulkkol">카페별꼴</a></li>
+              <li><a href="https://www.facebook.com/vegancafedy">달냥</a></li>
+              <li><a href="https://www.instagram.com/cafedadalab">다다랩</a></li>
+              <li><a href="https://www.facebook.com/CafeMargot">마고카페</a></li>
+              <li><a href="https://www.facebook.com/ppuriontheplate">뿌리온더플레이트</a></li>
+              <li><a href="https://www.instagram.com/bottle_factory">보틀팩토리</a></li>
+              <li><a href="https://www.instagram.com/earth__us">얼스어스</a></li>
+              <li><a href="https://www.instagram.com/namu_geuneul">우리동네그늘</a></li>
+              <li><a href="https://ko-kr.facebook.com/cafemangwon">카페엠</a></li>
+              <li>하우스플랜트2호점</li>
+              <li>바오밥나무</li>
+              <li><a href="https://http://www.instagram.com/readytowellness">레디투웰니스</a></li>
+              <li><a href="https://instagram.com/dear.eco">디어에코</a></li>
+              <li><a href="https://www.bgreen.co.kr">비그린</a></li>
+              <li><a href="https://www.instagram.com/snse_12">가치가게</a></li>
+              <li><a href="https://cafe.naver.com/gothechorok">더초록</a></li>
+              <li><a href="https://www.facebook.com/roundtriangle/">라운드트라이앵글</a></li>
+              <li><a href="https://touch4good.com/">터치포굿</a></li>
+              <li><a href="http://www.sb.go.kr/dongoffice">동선 나눔점방</a></li>
+              <li>라마홈</li>
+              <li><a href="https://www.instagram.com/gonggi_2020/">대안생활 공기</a></li>
+              <li><a href="https://ko.wasteupso.com/">waste upso</a></li>
+              <li><a href="https://www.instagram.com/magazine.ssssl/">무포장 가게 쓸</a></li>
+              <li><a href="https://www.innovationpark.kr/">없는가게쓸</a></li>
+              <li><a href="https://www.instagram.com/rogpashop/">사직동그가게</a></li>
+              <li>브릿지엣지</li>
+              <li><a href="https://www.instagram.com/cafe.gyute/">곁애</a></li>
+              <li><a href="https://www.instagram.com/sustainable_habits_/">서스테인어블 해빗</a></li>
+              <li><a href="http://www.papernuts.kr/">페이퍼넛츠</a></li>
+              <li><a href="https://www.instagram.com/apbbang/">앞으로의 빵집</a></li>
+              <li><a href="https://www.instagram.com/forfourbread/">포포브레드</a></li>
+              <li><a href="https://www.instagram.com/giut_giut/">기웃기웃</a></li>
+              <li><a href="https://www.instagram.com/molehand/">두더지손가게</a></li>
+              <li><a href="https://www.instagram.com/quoirez.b_gusan/">쿠아레비 구산점</a></li>
+              <li><a href="https://www.instagram.com/trans_614/">카페 드랜스</a></li>
 
-            <div class="trend-entry d-flex">
-              <div class="number align-self-start">01</div>
-              <div class="trend-contents">
-                <h2><a href="blog-single.html" >News Needs to Meet Its Audiences Where They Are</a></h2>
-                <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                  <span class="date-read">Jun 14</span>
-                </div>
-              </div>
-            </div>
+            </ul>
 
-            <div class="trend-entry d-flex">
-              <div class="number align-self-start">02</div>
-              <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                  <span class="date-read">Jun 14</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="trend-entry d-flex">
-              <div class="number align-self-start">03</div>
-              <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                  <span class="date-read">Jun 14</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="trend-entry d-flex pl-0">
-              <div class="number align-self-start">04</div>
-              <div class="trend-contents">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                  <span class="date-read">Jun 14</span>
-                </div>
-              </div>
-            </div>
             
             <p>
-              <a href="#" class="more">See All Stores<span class="icon-keyboard_arrow_right"></span></a>
+              <a href="/echozapp/map/" class="more">See All Stores<span class="icon-keyboard_arrow_right"></span></a>
             </p>
           </div>
         </div>
       </div>
     </div>
-
-
 {% endblock %}

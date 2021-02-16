@@ -27,6 +27,10 @@
   <link href="/static/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 
   <link rel="stylesheet" href="/static/css/style.css">
+  <!--추가-->
+
+
+
 
 </head>
 
@@ -92,16 +96,16 @@
                   <a href="/echozapp/How/"  class="nav-link text-left">How?</a>
                 </li>
                 <li>
-                  <a href="/echozapp/Where/" class="nav-link text-left">Where?</a>
+                  <a href="/echozapp/map/" class="nav-link text-left">Where?</a>
                 </li>
                 <li>
                     <a href="/echozapp/Events/"   class="nav-link text-left">Events</a>
                 </li>
                 <li><a href="/echozapp/Board/"   class="nav-link text-left">Board</a></li>
                 {% if user.is_authenticated %}
-                        <li><a class="nav-link text-left">{{user.username}}</a></li>
-                        <li><a href="/echozapp/mypage/" class="nav-link text-left">내 정보</a></li>
-                        <li><a href="/echozapp/logout" class="nav-link text-left">로그아웃</a></li>
+                        <li><a class="nav-link text-left">{{user.last_name}}{{user.first_name}}님</a></li>
+                        <li><a href="/echozapp/mypage/" class="nav-link text-left">My page</a></li>
+                        <li><a href="/echozapp/logout" class="nav-link text-left">Logout</a></li>
                 {%else%}
                    <li><a href="/accountapp/login/" class="nav-link text-left">Login</a></li>
                 {% endif %}
@@ -181,7 +185,7 @@
   <script src='/static/js/owl.carousel.min.js'></script>
   <script src='/static/js/jquery.stellar.min.js'></script>
   <script src='/static/js/jquery.countdown.min.js'></script>
-  <script src='/static/js/bootstrap-datepicker.min.js}'></script>
+  <script src='/static/js/bootstrap-datepicker.min.js'></script>
   <script src='/static/js/jquery.easing.1.3.js'></script>
   <script src='/static/js/aos.js'></script>
   <script src='/static/js/jquery.fancybox.min.js'></script>

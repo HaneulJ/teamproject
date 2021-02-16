@@ -11,7 +11,60 @@
               <span class="caption d-block small">step 5</span>
               <h2>Where is the Zero Waste stores?</h2>
             </div>
-            <div class="post-entry-2 d-flex">
+
+ <div id="map" style="width:700px;height:500px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script>
+
+	<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.329, 127.125), // 지도의 중심좌표
+            level: 12 // 지도의 확대 레벨
+    };
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    var positions = [
+        {% for latlng in latlng.all %}
+        {
+        content: '<div style=text-align:center;><a>{{latlng.name}}</a><br> <a>{{latlng.address}}</a></div>',
+
+        latlng: new kakao.maps.LatLng({{latlng.lat}}, {{latlng.lng}})
+    },
+    {% endfor %}
+    ];
+
+
+    for (var i = 0; i < positions.length; i ++) {
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng // 마커의 위치
+    });
+
+    // 마커에 표시할 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow(
+    	{content: positions[i].content , removable : true}
+    );
+
+    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    (function(marker, infowindow) {
+        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다
+        kakao.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+        });
+    })(marker, infowindow);
+}
+
+</script>
+           <br><br>
+            <hr><br>
+            <div class="section-title">
+              <span class="caption d-block small">step 6</span>
+              <h2>Where is refill marts?</h2>
+            </div>
+
+             <div class="post-entry-2 d-flex">
               <div class="thumbnail order-md-2" style="background-image: url('/static/images/shop.png')"></div>
               <div class="contents order-md-1 pl-0">
                 <h2><a href="/echozapp/shop1/">The Picker</a></h2>
@@ -24,41 +77,6 @@
             </div>
 
             <div class="post-entry-2 d-flex">
-              <div class="thumbnail order-md-2" style="background-image: url('/static/images/img_h_3.jpg')"></div>
-              <div class="contents order-md-1 pl-0">
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
-                <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                  <span class="date-read">Jun 14</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="post-entry-2 d-flex">
-              <div class="thumbnail order-md-2" style="background-image: url('/static/images/img_h_1.jpg')"></div>
-              <div class="contents order-md-1 pl-0">
-                
-                <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
-                <div class="post-meta">
-                  <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                  <span class="date-read">Jun 14</span>
-                </div>
-              </div>
-            </div>
-
-
-
-             <br> <hr> <br>
-            <div class="section-title">
-              <span class="caption d-block small">step 6</span>
-              <h2>Where is refill marts?</h2>
-            </div>
-
-            <iframe src="https://www.google.com/maps/d/embed?mid=1Ycy91WWbJvu_ETOfZcaNJPT9d0xA8pxK" width="100%" height="480"></iframe>
-
-            <div class="post-entry-2 d-flex">
               <div class="thumbnail order-md-2" style="background-image: url('/static/images/img_h_4.jpg')"></div>
               <div class="contents order-md-1 pl-0">
                 <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
@@ -131,10 +149,11 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+
           <div class="col-lg-3">
             <div class="section-title">
-              <h2>Popular Posts</h2>
+              <h2>Near Stores</h2>
             </div>
 
             <div class="trend-entry d-flex">
@@ -180,25 +199,17 @@
                 </div>
               </div>
             </div>
-            
+
             <p>
               <a href="#" class="more">See All Popular <span class="icon-keyboard_arrow_right"></span></a>
             </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <ul class="custom-pagination list-unstyled">
-              <li><a href="#">1</a></li>
-              <li class="active">2</li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-            </ul>
-          </div>
         </div>
       </div>
-    </div>
+	</div>
+  </div>
+
+
+
 
 
 
