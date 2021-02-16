@@ -1,16 +1,12 @@
-from pyexpat.errors import messages
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.template import loader
 from django.contrib import auth
-from django.urls import reverse_lazy
-
-from .forms import CommentForm
-from .models import Post, Comment
+from .models import Post
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.utils import timezone
+from echozapp.models import Latlng
 
 
 def index(request) :
@@ -26,7 +22,7 @@ def logout(request):
 def mypage(request):
     context= None
     if request.user.is_authenticated:
-        context ={'loginuser' : request.user.last_name+request.user.first_name}
+        context ={'loginid': request.user.username,'loginuser' : request.user.last_name+request.user.first_name}
     return render(request, 'mypage.html',context)
 
 #글작성
@@ -49,6 +45,7 @@ def Board(request):
     vlistpage = paginator.get_page(page)
     boardcount = Post.objects.count()
     context = {"vlist": vlistpage,"boardcount":boardcount}
+
     return render(request, 'Board.html',context)
 
 def Boardview(request):
@@ -80,6 +77,24 @@ def Boardupdate(request):
         update = Post.objects.get(id=id)
         jsonContent={"title" : update.title, "content": update.content }
         return JsonResponse( jsonContent, json_dumps_params={'ensure_ascii':False})
+
+def search1(request, name) :
+    page = request.GET.get('page', 1)
+    vlist = Post.objects.filter(title__contains = name)
+    paginator = Paginator(vlist, 3)
+    vlistpage = paginator.get_page(page)
+
+    context = {"vlist": vlistpage}
+    return render(request, 'Board.html', context)
+
+def search2(request, content):
+    page = request.GET.get('page', 1)
+    vlist = Post.objects.filter(content__contains=content)
+    paginator = Paginator(vlist, 3)
+    vlistpage = paginator.get_page(page)
+    context = {"vlist": vlistpage}
+    return render(request, 'Board.html', context)
+
 
 def What(request):
     return render(request, 'What.html')
@@ -187,168 +202,28 @@ def event131(request):
 def event21(request):
     return render(request, 'event21.html')
 
+def book1(request):
+    return render(request, 'book1.html')
+
+def book2(request):
+    return render(request, 'book2.html')
+
+def book3(request):
+    return render(request, 'book3.html')
+
+def book4(request):
+    return render(request, 'book4.html')
+
 
 
 def blogSingle(request) :
     template = loader.get_template('blog-single.html')
     return HttpResponse(template.render(None, request))
 
+def map(request):
+    latlng = Latlng.objects.all()
+    return render(request, 'map.html', {'latlng': latlng})
 
-
-
-def comment_writer(request, post_pk):
-    if request.method == 'POST':
-        post = get_object_or_404(Boardview, pk=post_pk)
-        content= request.POST.get('content')
-
-        conn_user = request.user
-        conn_profile = Boardview.objects.get(user=conn_user)
-
-        if not content:
-            messages.info(request, '댓글을 입력하세요')
-            return HttpResponseRedirect('Boardview')
-
-    Comment.objects.create(post=post, comment_writer=conn_profile, comment_contents=content)
-    return HttpResponseRedirect('Boardview')
-
-from django.shortcuts import render, redirect
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
-
-
-def new(request):
-    if request.method == 'POST':
-        # Database에 저장
-        # 1. 요청에 실려온 data 꺼내오기
-        # title = request.POST.get('title')
-        # content = request.POST.get('content')
-        form = PostForm(request.POST)
-
-        # 2-1. data 유효성 검사
-        if form.is_valid():
-            # (ModelForm) 2-2. Database에 저장
-            post = form.save()
-            # # 2-2. 검증된 data 꺼내오기
-            # title = form.cleaned_data.get('title')
-            # content = form.cleaned_data.get('content')
-            # # 2-3. Database에 저장
-            # article = Article(title=title, content=content)
-            # article.save()
-            # 3. 저장된 data를 확인할 수 있는 곳으로 안내
-            return redirect('Boardview', post.pk)
-
-    else:  # GET
-        # 작성 양식 보여주기
-        form = PostForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'Boardview.html', context)
-
-
-def Boardview_detail(request, pk):
-    # Database에서 data 가져오기
-    post = Post.objects.get(pk=pk)
-
-    # 댓글 작성 양식 가져오기
-    comment_form = CommentForm()
-
-    context = {
-        'post': post,
-        'comment_form': comment_form,
-    }
-    return render(request, 'Boardview', context)
-
-
-def delete(request, pk):  # POST
-    post = Post.objects.get(pk=pk)
-    if request.method == 'POST':
-        post.delete()
-    return redirect('Boardview')
-
-
-def edit(request, pk):
-    # 1. Database에서 data 가져오기
-    post = Post.objects.get(pk=pk)
-
-    if request.method == 'POST':
-        # data 수정!
-
-        # (ModelForm) 2-1. form에 data 집어넣기 + instance와 연결
-        form = PostForm(request.POST, instance=post)
-        # # 2-1. form에 data 집어넣기(검증 목적)
-        # form = ArticleForm(request.POST)
-        # 2-2. form에서 data 유효성 검사
-        if form.is_valid():
-            # (ModelForm) 2-3. Database에 저장
-            post = form.save()
-            # # 2-3. 검증된 data를 반영하기(저장)
-            # article.title = form.cleaned_data.get('title')
-            # article.content = form.cleaned_data.get('content')
-            # article.save()
-            # 3. 저장된 내용을 확인할 수 있는 페이지로 안내
-            return redirect('Boardview', post.pk)
-    else:
-        # 수정 양식 보여주기!
-        # (ModelForm) 2. Form에 data 채워 넣기
-        form = PostForm(instance=post)
-        # # 2. Form에 data 채워 넣기
-        # form = ArticleForm(initial=article.__dict__)
-    context = {
-        'form': form,
-    }
-    return render(request, 'comments_edit.html', context)
-
-
-def comments_new(request, post_pk):  # POST
-    # 1. 요청이 POST 인지 점검
-    if request.method == 'POST':
-        # 2. form에 data를 집어넣기 (목적 == 유효성 검사)
-        form = CommentForm(request.POST)
-        # request.POST #=>
-        # 3. form에서 유효성 검사를 시행
-        if form.is_valid():
-            # 4. 통과하면 database에 저장
-            comment = form.save(commit=False)
-            # 4-1. article 정보 주입
-            comment.post_id = post_pk
-            comment.save()
-    # 5. 생성된 댓글을 확인할 수 있는 곳으로 안내
-    return redirect('Boardview', post_pk)
-
-
-def comments_delete(request, post_pk, pk):  # POST
-    # 0. 요청이 POST인지 점검
-    if request.method == 'POST':
-        # 1. pk를 가지고 삭제하려는 data를 꺼내오기
-        comment = Comment.objects.get(pk=pk)
-        # 2. 삭제
-        comment.delete()
-    # 3. 삭제되었는지 확인 가능한 곳으로 안내
-
-    return redirect('Boardview', post_pk)
-
-
-def comments_edit(request, post_pk, pk):  # GET , POST
-    # Database에서 수정하려 하는 data 가져오기
-    comment = Comment.objects.get(pk=pk)
-    # 0. 요청의 종류가 POST인지 GET인지 점검
-    if request.method == 'POST':
-        # 실제로 수정 !
-        # 1. form에 '넘어온 data' & '수정하려는 data' 집어넣기
-        form = CommentForm(request.POST, instance=comment)
-        # 2. 유효성 검사
-        if form.is_valid():
-            # 3. 검사를 통과했다면, save
-            comment = form.save()
-            # 4. 변경된 결과 확인하는 곳으로 안내
-            return redirect('Boardview', post_pk)
-    else:
-        # 수정 양식 보여주기!
-        # 1. form class 초기화 (생성)
-        form = CommentForm(instance=comment)
-
-    context = {
-        'form': form,
-    }
-    return render(request, 'comments_edit.html', context)
+def map_my(request):
+    latlng = Latlng.objects.all()
+    return render(request, 'map_my.html', {'latlng': latlng})

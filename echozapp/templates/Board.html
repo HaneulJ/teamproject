@@ -10,18 +10,33 @@
           <div class="col-lg-12">
             <div class="section-title mb-5">
               <h2>게시판</h2>
-              {% if user.is_authenticated %}
+
+                {% if user.is_authenticated %}
                 <div ><button id="write" onclick="displayInputForm()" style="float:right;  background-color: white; color:black; opacity:0.8;" type="button" class="btn">Write</button></div>
-              {%else%}
+                {%else%}
+
 
               {% endif %}
             </div>
           </div>
         </div>
         <!-- 게시판 시작-->
+            <br>
+            <div>
+                총 게시글: {{boardcount}}
 
-            <p>총 게시글: {{boardcount}}</p>
+            <div style="float:right">
+                <select style=" border-radius : 10px" name="searchtype">
+                    <option value="search1">TITLE</option>
+                    <option value="search2">CONTENT</option>
+                </select>
 
+                <input type="text"  style=" border-radius : 10px" placeholder="Search..." name="keyword" >
+                <button  style="background-color: white; color:black; opacity:0.8;" class="btn" onclick="processSearch() ">search</button>
+
+            </div>
+            </div>
+            <br>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -46,7 +61,7 @@
                     <td>{{wdata.author.last_name}}{{wdata.author.first_name}}</td>
                     <td>{{wdata.count}}</td>
                     <!--<td>#</td>-->
-                    <td >{{wdata.writedate |date:"Y-m-d"}}</td>
+                    <td >{{wdata.writedate}}</td>
 
                     {% if wdata.author.username == request.user.username%}
                         <td onclick="update({{ wdata.id }})">수정</td>
@@ -114,6 +129,26 @@
 
                 </div>
 
+                <div id="modify"  style="display:none;" >
+                    <h2 style="text-align: center">BOARD</h2>
+
+	                <form method="post" action="{% url 'Boardwrite' %}" class="p-5 bg-light">
+                     {% csrf_token %}
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text"  name="title" class="form-control" placeholder="제목" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Content *</label>
+		                    <textarea  class="form-control" name="content" cols="30" rows="5" placeholder="의견을 적어주세요."></textarea>
+ 		                </div>
+                        <div class="form-group">
+ 		                    <button class="btn btn-primary py-3" type="submit" value="Submit">submit</button>
+
+                        </div>
+	                </form>
+
+                </div>
             </div>
       </div>
 
@@ -134,7 +169,7 @@
 
         function update(id) {
             $.getJSON("{% url 'Boardupdate' %}?id="+id, function(jsonObj) {
-                $('#ccform').css('display', 'block')
+                $('#modify').css('display', 'block')
                 const dom1 = $('[name="title"]');
                 const dom2 = $('[name="content"]');
                 dom1.removeAttr("placeholder");
@@ -142,8 +177,12 @@
                 dom2.removeAttr("placeholder");
                 dom2.text(jsonObj.content);
 
-                $('#ccform form').attr("action", "{% url 'Boardupdate' %}?id="+id)
+                $('#modify form').attr("action", "{% url 'Boardupdate' %}?id="+id)
             });
+        }
+
+        function processSearch() {
+            location.href = '/echozapp/'+$('[name="searchtype"]').val()+'/'+$('[name="keyword"]').val();
         }
     </script>
 

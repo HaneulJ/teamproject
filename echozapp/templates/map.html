@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="site-section">
+      <div class="container">
+ 		<div class="row">
+          <div class="col-lg-9">
+            <div class="section-title">
+              <span class="caption d-block small">step 5</span>
+              <h2>Where is the Zero Waste stores?</h2>
+            </div>
+
+	<div id="map" style="width:700px;height:500px;align:middle;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script>
+	<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(37.329, 127.125), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다
+{% for latlng in latlng.all %}
+var markerPosition  = new kakao.maps.LatLng({{latlng.lat}}, {{latlng.lng}});
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+{% endfor %}
+
+// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+// marker.setMap(null);
+
+</script>
+	  </div>
+	</div>
+	</div>
+	</div>
+
+{% endblock %}

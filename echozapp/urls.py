@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+
 urlpatterns = [
     path('index/', views.index, name='index'),
     path('logout/', views.logout, name='logout'),
@@ -13,6 +14,10 @@ urlpatterns = [
     path('Boardview/', views.Boardview, name='Boardview'),
     path('Boardupdate/', views.Boardupdate, name='Boardupdate'),
     path('Boarddel/', views.Boarddel, name='Boarddel'),
+    path("search1/", views.Board, name="search1"),
+    path("search2/", views.Board, name="search2"),
+    path("search1/<name>", views.search1, name="search1"),
+    path("search2/<content>", views.search2, name="search2"),
     path('Events/', views.Events, name='Events'),
     path('checklist0/', views.checklist0, name='checklist0'),
     path('checklist1/', views.checklist1, name='checklist1'),
@@ -44,13 +49,12 @@ urlpatterns = [
     path('event21/', views.event21, name='event21'),
     path('event1231/', views.event1231, name='event1231'),
     path('event131/', views.event131, name='event131'),
+    path('book1/', views.book1, name='book1'),
+    path('book2/', views.book2, name='book2'),
+    path('book3/', views.book3, name='book3'),
+    path('book4/', views.book4, name='book4'),
+    path('map/', views.map, name='map'),
+    path('map_my/', views.map_my, name='map_my'),
 
-    path('<int:pk>/', views.Boardview, name='detail'),
-    path('<int:pk>/delete/', views.delete, name='delete'),
-    path('<int:pk>/edit/', views.edit, name='edit'),
-    # /articles/1/comments/new/
-    path('<int:article_pk>/comments/new/', views.comments_new, name='comments_new'),
-    path('<int:article_pk>/comments/<int:pk>/delete/', views.comments_delete, name = 'comments_delete'),
-    path('<int:article_pk>/comments/<int:pk>/edit', views.comments_edit, name ='comments_edit'),
 
 ]
