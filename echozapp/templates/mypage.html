@@ -19,15 +19,123 @@
         <div class="row">
           <div class="col-lg-12">
             <a>ID:  {{loginid}} </a><br>
-            <a>NAME:  {{loginuser}} </a>
+            <a>NAME:  {{loginuser}} </a><br><br>
+            <a></a><br><br>
+          </div>
+        </div>
+          <div id='userpost' >
+          <div>
+                총 게시글: {{myboardcount}}
+
+
+
 
           </div>
+            <br>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <!--<th style="width:10%;">번호</th>-->
+                        <th style="width:30%; text-align:center;">제목</th>
+                        <th style="width:10%;">이름</th>
 
-        </div>
+                        <!--<th style="width:10%;">추천수</th>-->
+                        <th style="width:20%;">작성날짜</th>
+                        <th style="width:10%;">수정</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- 나중에 변수 작성( 게시글 list)-->
+
+
+                 {% for wdata in user_post %}
+                <tr>
+
+
+                    <td onclick="Boardview({{wdata.id}})"> {{wdata.title}} </td>
+                    <td>{{wdata.author.last_name}}{{wdata.author.first_name}}</td>
+
+                    <!--<td>#</td>-->
+                    <td >{{wdata.writedate}}</td>
+
+                    {% if wdata.author.username == request.user.username%}
+                        <td onclick="update({{ wdata.id }})">수정</td>
+                    {% endif %}
+                </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+
+            <div id="modify"  style="display:none;" >
+                <h2 style="text-align: center">BOARD</h2>
+
+                  <form method="post" action="{% url 'Boardwrite' %}" class="p-5 bg-light">
+                     {% csrf_token %}
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text"  name="title" class="form-control" placeholder="제목" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Content *</label>
+		                    <textarea  class="form-control" name="content" cols="30" rows="5" placeholder="의견을 적어주세요."></textarea>
+ 		                </div>
+                        <div class="form-group">
+ 		                    <button class="btn btn-primary py-3" type="submit" value="Submit">submit</button>
+
+                        </div>
+                  </form>
+
+            </div>
       </div>
 
     </div>
     <!-- 게시판 끝-->
 
+      <ul class="pagination justify-content-center">
+          {% if user_postpage.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{user_postpage.previous_page_number}}">Previous</a></li>
+          {% else %}
+            <li class="page-item disabled"><a class="page-link"  tabindex="-1" aria-disabled="true" href="#">Previous</a></li>
+          {% endif %}
+          {% for page_number in user_postpage.paginator.page_range %}
 
+            {% if page_number == user_postpage.number %}
+                <li class="page-item active" aria-current="page"><a class="page-link" href="?page={{page_number}}"> {{page_number}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{page_number}}"> {{page_number}}</a></li>
+            {% endif%}
+
+          {% endfor %}
+
+          {% if user_postpage.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{user_postpage.next_page_number}}">Next</a></li>
+          {% else%}
+            <li class="page-item disabled"><a class="page-link"  tabindex="-1" aria-disabled="true" href="#">Next</a></li>
+          {% endif %}
+
+      </ul>
+      <hr >
+    <script>
+            function displaypost(){
+
+                $('#userpost').css('display','block');
+            }
+
+            function update(id) {
+                $.getJSON("{% url 'Boardupdate' %}?id="+id, function(jsonObj) {
+                  $('#modify').css('display', 'block')
+                  const dom1 = $('[name="title"]');
+                  const dom2 = $('[name="content"]');
+                  dom1.removeAttr("placeholder");
+                  dom1.attr("value", jsonObj.title);
+                  dom2.removeAttr("placeholder");
+                  dom2.text(jsonObj.content);
+
+                  $('#modify form').attr("action", "{% url 'Boardupdate' %}?id="+id)
+                });
+            }
+
+    </script>
 {% endblock %}

@@ -31,9 +31,6 @@ urlpatterns = [
     path('news6/', views.news6, name='news6'),
     path('news7/', views.news7, name='news7'),
     path('news8/', views.news8, name='news8'),
-    path('shop1/', views.shop1, name='shop1'),
-    path('shop2/', views.shop2, name='shop2'),
-    path('shop3/', views.shop3, name='shop3'),
     path('tip1/', views.tip1, name='tip1'),
     path('tip2/', views.tip2, name='tip2'),
     path('tip3/', views.tip3, name='tip3'),
@@ -55,6 +52,12 @@ urlpatterns = [
     path('book4/', views.book4, name='book4'),
     path('map/', views.map, name='map'),
     path('map_my/', views.map_my, name='map_my'),
+    path('shop1/', views.shop1, name='shop1'),
+    path('shop2/', views.shop2, name='shop2'),
+    path('shop3/', views.shop3, name='shop3'),
+    path('shop4/', views.shop4, name='shop4'),
+    path('shop5/', views.shop5, name='shop5'),
+    path('shop6/', views.shop6, name='shop6'),
 
 
 ]

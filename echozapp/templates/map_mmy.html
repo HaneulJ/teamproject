@@ -23,45 +23,37 @@
 
 {% block content %}
 
-
     <div class="site-section">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-8 single-content">
-            <div class="section-title">
-              <h2>In 경기/인천/강원</h2> </div>
+		  <div class="col-lg-9">
 
-    <p class="mb-5">
-        <div id="map" style="width:700px;height:700px;align:middle;"></div></p>
-    <p>
-		  START<img src="/static/images/lclick.png "width="40" height="40">
-		  STOP <img src="/static/images/rclick.png "width="40" height="40" style="margin-right: 450px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button  class="btn btn-outline-light" style=" background-color : white; border :white " onclick="deleteClickLine(); deleteCircleDot(); deleteDistnce();"><img src="/static/images/refresh.png "width="35" height="35"></button><br>
-    </p>
+      <div id="map" style="width:700px;height:500px;align:middle;"></div>
+      <p>
+		  START<img src="/static/images/lclick.png "width="50" height="50">
 
-
-
+		  STOP <img src="/static/images/rclick.png "width="50" height="50" style="margin-right: 450px;">
+		  <button  class="btn btn-outline-light" style=" background-color : white; border :white " onclick="deleteClickLine(); deleteCircleDot(); deleteDistnce(); " ><img src="/static/images/refresh.png "width="45" height="45"></button><br>
+      </p>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script>
-
     <script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 10 // 지도의 확대 레벨
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 6 // 지도의 확대 레벨
     };
 
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 /* 추가부분 */
-    var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
-    var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
-    var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
-    var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
-    var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
+var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
+var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
 /* 추가부분 끝*/
 
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
-    if (navigator.geolocation) {
+if (navigator.geolocation) {
 
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -77,39 +69,41 @@
 
       });
 
-    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
     var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
         message = 'geolocation을 사용할수 없어요..'
 
     displayMarker(locPosition, message);
-    }
+}
 
-    var imageSrc = "/static/images/saessag.png", // 마커이미지의 주소입니다
-        imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
-        imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+var imageSrc = "/static/images/saessag.png", // 마커이미지의 주소입니다
+    imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
+    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-        markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
 
 
-    // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-    function displayMarker(locPosition, message) {
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
 
-    // 96개의 상점마커가 표시될 위치입니다
-    var markerPosition = [ {% for gig in gig.all %}
-    {       {% if gig.homepage == "" %}
-        	 	    content: '<div class="info">' + '<div class="title" style="padding:5px;">' + '{{gig.name}}' + '</div>'+'<div class="body">' + '<div class="body">' + '<div >' +  '<div>{{gig.address}}</div>' +'</div>'+'</div>'+'</div>',
-            {% else %}
-        		    content: '<div class="info">' + '<div class="title">' + '{{gig.name}}' + '</div>'+'<div class="body">'+ '<div class="desc">' + '<div class="ellipsis">{{gig.address}}</div>' +'<div><a href="{{gig.homepage}}" target="_blank" class="link">홈페이지</a></div>'+'</div>'+'</div>'+'</div>',
-            {% endif %}
-                    latlng: new kakao.maps.LatLng({{gig.lat}}, {{gig.lng}})
+// 96개의 상점마커가 표시될 위치입니다
+var markerPosition = [ {% for latlng in latlng.all %}
+{       {% if latlng.homepage == no %}
+        	 	content: '<div class="info">' + '<div class="title" style="padding:5px;">' + '{{latlng.name}}' + '</div>'+'<div class="body">' + '<div class="body">' + '<div >' +  '<div>{{latlng.address}}</div>' +'</div>'+'</div>'+'</div>',
+        {% else %}
+        		content: '<div class="info">' + '<div class="title">' + '{{latlng.name}}' + '</div>'+'<div class="body">'+ '<div class="desc">' +  '<div class="ellipsis">{{latlng.address}}</div>' +'<div><a href="{{latlng.homepage}}" target="_blank" class="link">홈페이지</a></div>'+'</div>'+'</div>'+'</div>',
+        {% endif %}
+        latlng: new kakao.maps.LatLng({{latlng.lat}}, {{latlng.lng}})
+
+
+
     },
-    {% endfor %}
-    ];
+{% endfor %} ];
 
-    for (var i = 0; i < markerPosition.length; i ++) {
+for (var i = 0; i < markerPosition.length; i ++) {
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
@@ -129,15 +123,15 @@
         kakao.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map, marker);});
     })(marker, infowindow);
-    }
+}
 
-   var marker = new kakao.maps.Marker({
+var marker = new kakao.maps.Marker({
         map: map,
         position: locPosition
     });
 
     map.setCenter(locPosition);
-    }
+}
 
 /* 추가부분*/
 // 지도에 클릭 이벤트를 등록합니다
@@ -400,50 +394,8 @@ function getTimeHTML(distance) {
     return content;
 }
 /*추가 부분 끝*/
-    </script>
+</script>
 
-            <div class="post-meta d-flex mb-5">
-              <div class="vcard">
-                  <span class="date-read">Update <span class="icon-star2"></span> Feb 14</span>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-lg-4 ml-auto">
-            <div class="section-title">
-              <h2>Stores List</h2>
-            </div>
-          <ul>
-              <li><a href="https://dong-grami-refillery.tistory.com">동그라미 리필러리</a></li>
-              <li><a href="https://www.gwanggyosanwool.org">광교산울교회</a></li>
-              <li>꿈꾸는 부엉이</li>
-              <li><a href="http://forestofwisdom.or.kr/">지혜의 숲</a></li>
-              <li><a href="https://www.instagram.com/magandgra/">마그 앤 그래</a></li>
-              <li><a href="https://www.instagram.com/rhino_books_/">코뿔소 책방</a></li>
-              <li>워시존 파주운정점</li>
-              <li><a href="https://www.soaprefillstation.co.kr/">솝 리필스테이션</a></li>
-              <li><a href="https://www.instagram.com/earth_etiquette/">지구에티켓</a></li>
-              <li><a href="https://www.instagram.com/gacistore/">가치상점</a></li>
-              <li><a href="http://naver.me/F1RSyvGD">레트로 카페33</a></li>
-              <li><a href="https://www.instagram.com/cafe_odumak/">카페 오두막</a></li>
-              <li><a href="https://zeroshop.modoo.at/">지구수호 대리필상점</a></li>
-              <li><a href="https://smartstore.naver.com/todosobre">소중한 모든것</a></li>
-              <li><a href="https://instagram.com/yosun.dang">요선당</a></li>
-              <li><a href="https://www.papascut.com">파파스컷</a></li>
-              <li><a href="https://smartstore.naver.com/bongtree123">봉트리하우스</a></li>
-              <li><a href="https://www.instagram.com/tomorrow.market">내일 상회</a></li>
-              <li><a href="http://mothercenter.net/">마더센터</a></li>
-              <li><a href="https://www.instagram.com/hermanas__2019/">이너피스</a></li>
-              <li>로하스카페나비</li>
-              <li>춘천 아이쿱생협</li>
-         </ul>
-
-
-            <p>
-              <a href="/echozapp/map/" class="more">See All Stores<span class="icon-keyboard_arrow_right"></span></a>
-            </p>
-          </div>
         </div>
       </div>
     </div>
