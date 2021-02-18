@@ -12,6 +12,7 @@ urlpatterns = [
     path('Board/', views.Board, name='Board'),
     path('Boardwrite/', views.Boardwrite, name='Boardwrite'),
     path('Boardview/', views.Boardview, name='Boardview'),
+    path('Boardview1/', views.Boardview1, name='Boardview1'),
     path('Boardupdate/', views.Boardupdate, name='Boardupdate'),
     path('Boarddel/', views.Boarddel, name='Boarddel'),
     path("search1/", views.Board, name="search1"),

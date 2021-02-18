@@ -52,7 +52,7 @@
                 <tr>
 
 
-                    <td onclick="Boardview({{wdata.id}})"> {{wdata.title}} </td>
+                    <td onclick="Boardview1({{wdata.id}})"> {{wdata.title}} </td>
                     <td>{{wdata.author.last_name}}{{wdata.author.first_name}}</td>
 
                     <!--<td>#</td>-->
@@ -118,6 +118,9 @@
       </ul>
       <hr >
     <script>
+            function Boardview1(id){
+                location.href="{% url 'Boardview1'%}?Boardview1="+id;
+            }
             function displaypost(){
 
                 $('#userpost').css('display','block');
