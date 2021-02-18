@@ -92,6 +92,21 @@ def Boardupdate(request):
         jsonContent={"title" : update.title, "content": update.content }
         return JsonResponse( jsonContent, json_dumps_params={'ensure_ascii':False})
 
+def myBoardupdate(request):
+    if request.method == "POST":
+        id = request.GET.get('id')
+        update = Post.objects.get(id=id)
+        update.title = request.POST['title']
+        update.content = request.POST['content']
+        update.writedate = timezone.datetime.now()
+        update.save()
+        return redirect('mypage')
+    else :
+        id = request.GET.get("id")
+        update = Post.objects.get(id=id)
+        jsonContent={"title" : update.title, "content": update.content }
+        return JsonResponse( jsonContent, json_dumps_params={'ensure_ascii':False})
+
 def search1(request, name) :
     page = request.GET.get('page', 1)
     vlist = Post.objects.filter(title__contains = name)
@@ -217,12 +232,6 @@ def book3(request):
 
 def book4(request):
     return render(request, 'book4.html')
-
-
-
-def blogSingle(request) :
-    template = loader.get_template('blog-single.html')
-    return HttpResponse(template.render(None, request))
 
 def map(request):
     latlng = Latlng.objects.all()

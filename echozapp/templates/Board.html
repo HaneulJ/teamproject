@@ -64,7 +64,7 @@
                     <td >{{wdata.writedate}}</td>
 
                     {% if wdata.author.username == request.user.username%}
-                        <td onclick="update({{ wdata.id }})">수정</td>
+                        <td onclick="update({{ wdata.id }})"><img src="/static/images/edit.png" width="20" height="20"></td>
                     {% endif %}
                 </tr>
 

@@ -64,9 +64,16 @@
           </div>
           <div class="col-12 col-lg-6 ml-auto d-flex">
             <div class="ml-md-auto top-social d-none d-lg-inline-block">
-              <a href="#" class="d-inline-block p-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="d-inline-block p-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="d-inline-block p-3"><span class="icon-instagram"></span></a>
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">
+              {% if user.is_authenticated %}
+                        <li style="display:inline; float:left;"><a class="nav-link text-left">{{user.last_name}}{{user.first_name}}님</a></li>
+                        <li style="display:inline; float:left;"><a href="/echozapp/mypage/" class="nav-link text-left">My page</a></li>
+                        <li style="display:inline; float:left;"><a href="/echozapp/logout" class="nav-link text-left">Logout</a></li>
+                {%else%}
+                   <li style="display:inline; float:right;"><a href="/accountapp/login/" class="nav-link text-left">
+                     <img src="/static/images/login.png" onMouseOver="this.src='/static/images/login2.png'" onMouseOut="this.src='/static/images/login.png'" border="0" class="img-fluidid" style="width:30px; height:30px;">Login</a></li>
+                {% endif %}
+              </ul>
             </div>
 
           </div>
@@ -103,13 +110,6 @@
                     <a href="/echozapp/Events/"   class="nav-link text-left">Events</a>
                 </li>
                 <li><a href="/echozapp/Board/"   class="nav-link text-left">Board</a></li>
-                {% if user.is_authenticated %}
-                        <li><a class="nav-link text-left">{{user.last_name}}{{user.first_name}}님</a></li>
-                        <li><a href="/echozapp/mypage/" class="nav-link text-left">My page</a></li>
-                        <li><a href="/echozapp/logout" class="nav-link text-left">Logout</a></li>
-                {%else%}
-                   <li><a href="/accountapp/login/" class="nav-link text-left">Login</a></li>
-                {% endif %}
               </ul>
             </nav>
 
@@ -140,13 +140,13 @@
               <h2>About echoz</h2><br>
               <p>
               <a href="https://github.com/jihyun0202" target="_blank">
-                <img class="img-fluidid" src="/static/images/github.png" style="width:30px;"></a>   박지현  &nbsp&nbsp
+                <img class="img-fluidid" src="/static/images/github.png" style="width:30px; height:30px;"></a>   박지현  &nbsp&nbsp
               <a href="https://github.com/Heemang221" target="_blank">
-                <img class="img-fluidid" src="/static/images/github.png" style="width:30px;"></a>   박희망  &nbsp&nbsp
+                <img class="img-fluidid" src="/static/images/github.png" style="width:30px;height:30px;"></a>   박희망  &nbsp&nbsp
               <a href="https://github.com/HaneulJ" target="_blank">
-                <img class="img-fluidid" src="/static/images/github.png" style="width:30px;"></a>   정하늘  &nbsp&nbsp
+                <img class="img-fluidid" src="/static/images/github.png" style="width:30px;height:30px;"></a>   정하늘  &nbsp&nbsp
               <a href="https://github.com/HTSPRS" target="_blank">
-                <img class="img-fluidid" src="/static/images/github.png" style="width:30px;"></a>   황창하 <br>
+                <img class="img-fluidid" src="/static/images/github.png" style="width:30px;height:30px;"></a>   황창하 <br>
               </p>
             </div>
           </div>

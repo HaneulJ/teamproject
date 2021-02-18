@@ -59,7 +59,7 @@
                     <td >{{wdata.writedate}}</td>
 
                     {% if wdata.author.username == request.user.username%}
-                        <td onclick="update({{ wdata.id }})">수정</td>
+                        <td onclick="update({{ wdata.id }})"><img src="/static/images/edit.png" width="20" height="20"></td>
                     {% endif %}
                 </tr>
 
@@ -127,7 +127,7 @@
             }
 
             function update(id) {
-                $.getJSON("{% url 'Boardupdate' %}?id="+id, function(jsonObj) {
+                $.getJSON("{% url 'myBoardupdate' %}?id="+id, function(jsonObj) {
                   $('#modify').css('display', 'block')
                   const dom1 = $('[name="title"]');
                   const dom2 = $('[name="content"]');
@@ -136,7 +136,7 @@
                   dom2.removeAttr("placeholder");
                   dom2.text(jsonObj.content);
 
-                  $('#modify form').attr("action", "{% url 'Boardupdate' %}?id="+id)
+                  $('#modify form').attr("action", "{% url 'myBoardupdate' %}?id="+id)
                 });
             }
 

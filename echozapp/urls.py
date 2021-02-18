@@ -14,6 +14,7 @@ urlpatterns = [
     path('Boardview/', views.Boardview, name='Boardview'),
     path('Boardview1/', views.Boardview1, name='Boardview1'),
     path('Boardupdate/', views.Boardupdate, name='Boardupdate'),
+    path('myBoardupdate/', views.myBoardupdate, name='myBoardupdate'),
     path('Boarddel/', views.Boarddel, name='Boarddel'),
     path("search1/", views.Board, name="search1"),
     path("search2/", views.Board, name="search2"),
@@ -59,6 +60,7 @@ urlpatterns = [
     path('shop4/', views.shop4, name='shop4'),
     path('shop5/', views.shop5, name='shop5'),
     path('shop6/', views.shop6, name='shop6'),
+
 
 
 ]
