@@ -53,7 +53,6 @@ urlpatterns = [
     path('book3/', views.book3, name='book3'),
     path('book4/', views.book4, name='book4'),
     path('map/', views.map, name='map'),
-    path('map_my/', views.map_my, name='map_my'),
     path('shop1/', views.shop1, name='shop1'),
     path('shop2/', views.shop2, name='shop2'),
     path('shop3/', views.shop3, name='shop3'),

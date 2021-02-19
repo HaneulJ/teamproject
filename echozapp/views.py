@@ -237,10 +237,6 @@ def map(request):
     latlng = Latlng.objects.all()
     return render(request, 'map.html', {'latlng': latlng})
 
-def map_my(request):
-    latlng = Latlng.objects.all()
-    return render(request, 'map_my.html', {'latlng': latlng})
-
 def shop1(request):
     seoul = Seoul.objects.all()
     return render(request, 'shop1.html', {'seoul': seoul})
